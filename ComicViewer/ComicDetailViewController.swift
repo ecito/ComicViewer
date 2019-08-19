@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DataViewController: UIViewController {
+class ComicDetailViewController: UIViewController {
 
   @IBOutlet weak var dataLabel: UILabel!
   var dataObject: String = ""
