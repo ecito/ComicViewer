@@ -79,7 +79,7 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
       }
       
       index += 1
-      if index == self.comicStore.numberOfComics {
+      if index == self.comicStore.numberOfComics + 1 {
           return nil
       }
       return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)

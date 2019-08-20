@@ -35,7 +35,7 @@ class ComicPageViewController: UIViewController, UIPageViewControllerDelegate {
   }
 
   func setupPageController() {
-    self.pageViewController = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
+    self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     self.pageViewController!.delegate = self
 
     guard let currentComicIndex = comicStore?.currentComic?.index else {
