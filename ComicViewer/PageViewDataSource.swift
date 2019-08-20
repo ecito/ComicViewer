@@ -21,9 +21,9 @@ import AlamofireImage
 
 class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
 
-  var pageData: [String] = []
-
   var comicStore: ComicStore
+
+  var currentPageIndex: Int = 0
 
   init(store: ComicStore) {
     comicStore = store
@@ -37,18 +37,20 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
 
     // Create a new view controller and pass suitable data.
     let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ComicDetailViewController
+    dataViewController.comicIndex = index
     comicStore.comicAtIndex(at: index) { comic, error in
       if let comic = comic {
-        dataViewController.comicIndex = comic.index
-        dataViewController.dataLabel.text = comic.title
-
+        let viewModel = ComicViewModel()
+        viewModel.title = comic.title
+        viewModel.details = comic.details
         if let url = URL(string: comic.imageURL) {
-          dataViewController.imageView.af_setImage(withURL: url)
+          viewModel.URL = url
         }
+
+        dataViewController.viewModel = viewModel
       }
     }
 
-    //dataViewController.dataObject = self.pageData[index]
     return dataViewController
   }
 
@@ -62,7 +64,7 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
 
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
       var index = self.indexOfViewController(viewController as! ComicDetailViewController)
-      if (index == 0) || (index == NSNotFound) {
+      if (index == 1) || (index == NSNotFound) {
           return nil
       }
       

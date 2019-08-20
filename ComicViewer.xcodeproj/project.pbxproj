@@ -26,6 +26,7 @@
 		6596E8DF230C1AF7001CA848 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8DE230C1AF7001CA848 /* Dependency.swift */; };
 		6596E8E1230C1BE4001CA848 /* ComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8E0230C1BE4001CA848 /* ComicStore.swift */; };
 		6596E8E3230C209F001CA848 /* XKCDComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8E2230C209F001CA848 /* XKCDComicStore.swift */; };
+		6596E8E5230C3549001CA848 /* ComicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8E4230C3549001CA848 /* ComicViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		6596E8DE230C1AF7001CA848 /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		6596E8E0230C1BE4001CA848 /* ComicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicStore.swift; sourceTree = "<group>"; };
 		6596E8E2230C209F001CA848 /* XKCDComicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDComicStore.swift; sourceTree = "<group>"; };
+		6596E8E4230C3549001CA848 /* ComicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				6596E8A7230B0361001CA848 /* LaunchScreen.storyboard */,
 				6596E8AA230B0361001CA848 /* Info.plist */,
 				6596E8DE230C1AF7001CA848 /* Dependency.swift */,
+				6596E8E4230C3549001CA848 /* ComicViewModel.swift */,
 			);
 			path = ComicViewer;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				6596E8C1230B103B001CA848 /* XKCDComic.swift in Sources */,
 				6596E89F230B0360001CA848 /* ComicDetailViewController.swift in Sources */,
 				6596E89B230B0360001CA848 /* AppDelegate.swift in Sources */,
+				6596E8E5230C3549001CA848 /* ComicViewModel.swift in Sources */,
 				6596E8DA230BFC38001CA848 /* ComicNetworkAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

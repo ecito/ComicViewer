@@ -14,5 +14,28 @@ class ComicDetailViewController: UIViewController {
   @IBOutlet weak var imageView: UIImageView!
 
   var comicIndex: Int = NSNotFound
+
+  var viewModel: ComicViewModel? {
+    didSet {
+      render()
+    }
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+
+    render()
+  }
+
+  func render() {
+    if dataLabel != nil && imageView != nil {
+      if let viewModel = viewModel {
+        dataLabel.text = viewModel.title
+        if let URL = viewModel.URL {
+          imageView.af_setImage(withURL: URL)
+        }
+      }
+    }
+  }
 }
 
