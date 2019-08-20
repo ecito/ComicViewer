@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-101" y="-243"/>
         </scene>
-        <!--Comic Detail View Controller-->
+        <!--Comic Page Detail View Controller-->
         <scene sceneID="snT-py-3hH">
             <objects>
-                <viewController storyboardIdentifier="DataViewController" id="S4R-Ja-viH" customClass="ComicDetailViewController" customModule="ComicViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DataViewController" id="S4R-Ja-viH" customClass="ComicPageDetailViewController" customModule="ComicViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ZwX-cT-FIQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

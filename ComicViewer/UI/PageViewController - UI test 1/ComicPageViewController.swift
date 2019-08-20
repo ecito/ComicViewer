@@ -42,7 +42,7 @@ class ComicPageViewController: UIViewController, UIPageViewControllerDelegate {
       return
     }
 
-    let startingViewController: ComicDetailViewController = self.modelController.viewControllerAtIndex(currentComicIndex, storyboard: self.storyboard!)!
+    let startingViewController: ComicPageDetailViewController = self.modelController.viewControllerAtIndex(currentComicIndex, storyboard: self.storyboard!)!
 
     startingViewController.comicIndex = currentComicIndex
 
@@ -89,7 +89,7 @@ class ComicPageViewController: UIViewController, UIPageViewControllerDelegate {
     }
 
     // In landscape orientation: Set set the spine location to "mid" and the page view controller's view controllers array to contain two view controllers. If the current page is even, set it to contain the current and next view controllers; if it is odd, set the array to contain the previous and current view controllers.
-    let currentViewController = self.pageViewController!.viewControllers![0] as! ComicDetailViewController
+    let currentViewController = self.pageViewController!.viewControllers![0] as! ComicPageDetailViewController
     var viewControllers: [UIViewController]
 
     let indexOfCurrentViewController = self.modelController.indexOfViewController(currentViewController)

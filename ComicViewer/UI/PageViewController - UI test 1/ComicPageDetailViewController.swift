@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ComicDetailViewController: UIViewController {
+class ComicPageDetailViewController: UIViewController {
 
   @IBOutlet weak var dataLabel: UILabel!
   @IBOutlet weak var imageView: UIImageView!
