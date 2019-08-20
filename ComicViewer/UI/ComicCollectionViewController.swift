@@ -7,3 +7,20 @@
 //
 
 import Foundation
+import UIKit
+
+class ComicCollectionViewController: UICollectionViewController {
+
+  var comicStore: ComicStore = EmptyComicStore()
+  
+  lazy var dataSource: ComicCollectionDataSource = {
+    return ComicCollectionDataSource(comicStore: self.comicStore)
+  }()
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    collectionView.dataSource = self.dataSource
+    collectionView.reloadData()
+  }
+}
