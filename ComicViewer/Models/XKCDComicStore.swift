@@ -37,7 +37,7 @@ class XKCDComicStore: ComicStore {
     }
   }
 
-  func comicAtIndex(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) -> Void {
+  func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) -> Void {
     XKCDComicNetworkAPI.comic(at: index) { (response: DataResponse<XKCDComic>) in
       guard response.error == nil else {
         completionHandler(nil, response.error)
@@ -53,5 +53,4 @@ class XKCDComicStore: ComicStore {
       completionHandler(comic, nil)
     }
   }
-
 }

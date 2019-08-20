@@ -10,7 +10,7 @@ import UIKit
 
 class LoadingViewController: UIViewController {
 
-  // figure out how to dependency inject this guy
+  // TODO: figure out how to dependency inject this guy
   var comicStore: ComicStore = XKCDComicStore()
 
   override func viewDidLoad() {
@@ -31,7 +31,8 @@ class LoadingViewController: UIViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let destination = segue.destination as? ComicCollectionViewController {
+    if let destinationNav = segue.destination as? UINavigationController,
+      let destination = destinationNav.viewControllers.first as? ComicCollectionViewController {
       destination.comicStore = comicStore
     }
   }

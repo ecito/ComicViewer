@@ -22,28 +22,30 @@ class ComicCollectionDataSource: NSObject, UICollectionViewDataSource {
     return comicStore.numberOfComics
   }
 
+  func indexPathForComic(at index: Int) -> IndexPath {
+    return IndexPath(item: self.comicStore.numberOfComics - index, section: 0)
+  }
+
+  func comicIndex(for indexPath: IndexPath) -> Int {
+    return self.comicStore.numberOfComics - indexPath.row
+  }
+
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let index = self.comicStore.numberOfComics - indexPath.row
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ComicCollectionViewCell
-    comicStore.comicAtIndex(at: index) { [weak self] comic, error in
+    comicStore.comic(at: comicIndex(for: indexPath)) { comic, error in
       if error != nil {
         cell.backgroundColor = .red
       }
       else if let comic = comic {
-        cell.viewModel = self?.viewModelFor(comic: comic)
+        cell.backgroundColor = .white
+
+        if let URL = URL(string: comic.imageURL) {
+          cell.imageView.af_setImage(withURL: URL, placeholderImage: UIImage(named: "loading")) { response in
+            collectionView.collectionViewLayout.invalidateLayout()
+          }
+        }
       }
     }
     return cell
-  }
-
-  func viewModelFor(comic: Comic) -> ComicViewModel {
-    let viewModel = ComicViewModel()
-    viewModel.title = comic.title
-    viewModel.details = comic.details
-    if let url = URL(string: comic.imageURL) {
-      viewModel.URL = url
-    }
-
-    return viewModel
   }
 }

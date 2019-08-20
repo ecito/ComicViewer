@@ -16,6 +16,6 @@ class EmptyComicStore: ComicStore {
   func setUp(completionHandler: @escaping (Error?) -> Void) {
   }
 
-  func comicAtIndex(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) {
+  func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) {
   }
 }

@@ -38,7 +38,7 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
     // Create a new view controller and pass suitable data.
     let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ComicPageDetailViewController
     dataViewController.comicIndex = index
-    comicStore.comicAtIndex(at: index) { comic, error in
+    comicStore.comic(at: index) { comic, error in
       if let comic = comic {
         let viewModel = ComicViewModel()
         viewModel.title = comic.title
