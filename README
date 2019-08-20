@@ -22,7 +22,6 @@
 	* should have simple UI (fullscreen pagination?)
 	* xkcd API is simple json but 'search' and 'explanation' will require some investigation on how to consume 
 	* MVP should be absolutely limited to above features and released as-is, any more features or improvements will go in the next version if time allows.
-	* MVP can be made with vanilla swift. third-party libraries will come in handy for extra features 
 
 
 # cooking recipe:
@@ -30,7 +29,7 @@
 	* new Xcode project (try out Xcode page-based template)
 	* play around with a paged UI starting at the "last" page
 	* make "detail" page view in storyboard - big image and text under for details
-	* create networking stack
+	* choose networking stack
 	* create generic comic API and specific xkcd API
 	* connect page scroll with network request
 	* add some loading indicators

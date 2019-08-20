@@ -11,8 +11,9 @@ import UIKit
 class ComicDetailViewController: UIViewController {
 
   @IBOutlet weak var dataLabel: UILabel!
-  var dataObject: String = ""
+  @IBOutlet weak var imageView: UIImageView!
 
+  var dataObject: String = ""
 
   override func viewDidLoad() {
     super.viewDidLoad()
