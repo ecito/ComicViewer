@@ -25,6 +25,7 @@
 		6596E8DD230BFFA3001CA848 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8D5230BF6AF001CA848 /* AlamofireImage.framework */; };
 		6596E8DF230C1AF7001CA848 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8DE230C1AF7001CA848 /* Dependency.swift */; };
 		6596E8E1230C1BE4001CA848 /* ComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8E0230C1BE4001CA848 /* ComicStore.swift */; };
+		6596E8E3230C209F001CA848 /* XKCDComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8E2230C209F001CA848 /* XKCDComicStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		6596E8DB230BFCCE001CA848 /* XKCDNetworkComicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDNetworkComicAPI.swift; sourceTree = "<group>"; };
 		6596E8DE230C1AF7001CA848 /* Dependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependency.swift; sourceTree = "<group>"; };
 		6596E8E0230C1BE4001CA848 /* ComicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicStore.swift; sourceTree = "<group>"; };
+		6596E8E2230C209F001CA848 /* XKCDComicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDComicStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				6596E8C0230B103B001CA848 /* XKCDComic.swift */,
 				6596E8C2230B1333001CA848 /* Model.swift */,
 				6596E8E0230C1BE4001CA848 /* ComicStore.swift */,
+				6596E8E2230C209F001CA848 /* XKCDComicStore.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6596E8D8230BFC05001CA848 /* Router.swift in Sources */,
+				6596E8E3230C209F001CA848 /* XKCDComicStore.swift in Sources */,
 				6596E8C3230B1333001CA848 /* Model.swift in Sources */,
 				6596E8DC230BFCCE001CA848 /* XKCDNetworkComicAPI.swift in Sources */,
 				6596E8E1230C1BE4001CA848 /* ComicStore.swift in Sources */,

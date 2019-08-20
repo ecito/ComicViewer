@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 enum Router: URLRequestConvertible {
-  case xkcdComic(_ index: UInt32?)
+  case xkcdComic(_ index: Int?)
 
   var method: HTTPMethod {
     switch self {

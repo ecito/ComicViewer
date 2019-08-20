@@ -11,5 +11,5 @@ import Alamofire
 
 protocol ComicNetworkAPI {
   static func currentComic<T: Comic>(completionHandler: @escaping (DataResponse<T>) -> Void) -> Void
-  static func comic<T: Comic>(at index: UInt32?, completionHandler: @escaping (DataResponse<T>) -> Void) -> Void
+  static func comic<T: Comic>(at index: Int?, completionHandler: @escaping (DataResponse<T>) -> Void) -> Void
 }

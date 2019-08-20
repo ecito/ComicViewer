@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -22,30 +23,39 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
 
   var pageData: [String] = []
 
+  var comicStore: ComicStore
 
-  override init() {
-      super.init()
-    // Create the data model.
-    let dateFormatter = DateFormatter()
-    pageData = dateFormatter.monthSymbols
+  init(store: ComicStore) {
+    comicStore = store
   }
 
   func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> ComicDetailViewController? {
     // Return the data view controller for the given index.
-    if (self.pageData.count == 0) || (index >= self.pageData.count) {
+    if (self.comicStore.currentComic == nil) || (index > self.comicStore.numberOfComics) {
         return nil
     }
 
     // Create a new view controller and pass suitable data.
     let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ComicDetailViewController
-    dataViewController.dataObject = self.pageData[index]
+    comicStore.comicAtIndex(at: index) { comic, error in
+      if let comic = comic {
+        dataViewController.comicIndex = comic.index
+        dataViewController.dataLabel.text = comic.title
+
+        if let url = URL(string: comic.imageURL) {
+          dataViewController.imageView.af_setImage(withURL: url)
+        }
+      }
+    }
+
+    //dataViewController.dataObject = self.pageData[index]
     return dataViewController
   }
 
   func indexOfViewController(_ viewController: ComicDetailViewController) -> Int {
     // Return the index of the given data view controller.
     // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-    return pageData.firstIndex(of: viewController.dataObject) ?? NSNotFound
+    return viewController.comicIndex
   }
 
   // MARK: - Page View Controller Data Source
@@ -67,7 +77,7 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
       }
       
       index += 1
-      if index == self.pageData.count {
+      if index == self.comicStore.numberOfComics {
           return nil
       }
       return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)

@@ -14,7 +14,7 @@ class XKCDComicNetworkAPI: ComicNetworkAPI {
     comic(at: nil, completionHandler: completionHandler)
   }
 
-  static func comic<T>(at index: UInt32?, completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {
+  static func comic<T>(at index: Int?, completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {
     Alamofire.request(Router.xkcdComic(index)).validate().responseData { response in
       let comic = response.flatMap { data in
         try JSONDecoder().decode(T.self, from: data)
