@@ -78,20 +78,11 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="XKCD" id="o8i-9F-3dl"/>
                     <connections>
-                        <outlet property="searchBar" destination="Jgv-Hh-8hL" id="QNd-bS-qLT"/>
                         <segue destination="zfU-d0-deA" kind="show" identifier="PushComicDetail" id="fx2-Be-7Tf"/>
                         <segue destination="ZnZ-UL-33x" kind="show" identifier="PushComicPage" id="dm7-Lu-i0y"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fue-AN-XR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchBar contentMode="redraw" id="Jgv-Hh-8hL">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <outlet property="delegate" destination="d0o-NS-OdU" id="dBk-Ht-2bm"/>
-                    </connections>
-                </searchBar>
             </objects>
             <point key="canvasLocation" x="1249.2753623188407" y="-275.22321428571428"/>
         </scene>

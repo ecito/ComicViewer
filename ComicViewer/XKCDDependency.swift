@@ -17,7 +17,7 @@ class XKCDDependency: Dependency {
     return XKCDComicStore()
   }
 
-  func resolveCache() {
-    return
+  func resolveSearchProvider() -> ComicSearchProvider {
+    return XKCDRelevantComicSearchProvider()
   }
 }

@@ -23,11 +23,11 @@ class ComicCollectionDataSource: NSObject, UICollectionViewDataSource, HasComicS
   }
 
   func indexPathForComic(at index: Int) -> IndexPath {
-    return IndexPath(item: comicStore.availableIndexes.reversed().firstIndex(of: index)!, section: 0)
+    return IndexPath(item: comicStore.availableIndexes.firstIndex(of: index)!, section: 0)
   }
 
   func comicIndex(for indexPath: IndexPath) -> Int {
-    return comicStore.availableIndexes.reversed()[indexPath.row]
+    return comicStore.availableIndexes[indexPath.row]
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

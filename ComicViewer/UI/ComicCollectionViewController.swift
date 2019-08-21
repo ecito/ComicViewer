@@ -25,7 +25,7 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
     let searchController = UISearchController(searchResultsController: nil)
     searchController.searchResultsUpdater = self
     searchController.obscuresBackgroundDuringPresentation = false
-    searchController.searchBar.placeholder = "Search Candies"
+    searchController.searchBar.placeholder = "Search"
     navigationItem.searchController = searchController
     definesPresentationContext = true
     return searchController
@@ -37,12 +37,16 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
     return ComicCollectionDataSource(comicStore: self.comicStore)
   }()
 
-  var searchDataSource: ComicCollectionDataSource?
+  lazy var searchProvider: ComicSearchProvider = {
+    return DependencyInjector.dependency!.resolveSearchProvider()
+  }()
+
+  var searchComicStore: ComicStore?
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    navigationItem.titleView = searchBar
+    setupSearch()
 
     collectionView.collectionViewLayout = MagazineLayout()
     collectionView.register(ComicCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
@@ -51,7 +55,7 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    comicStore.comic(at: dataSource.comicIndex(for: indexPath)) { [weak self] comic, error in
+    activeStore.comic(at: dataSource.comicIndex(for: indexPath)) { [weak self] comic, error in
       guard let comic = comic,
         let viewModel = ComicViewModel(comic: comic),
         error == nil else {
@@ -70,7 +74,7 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
     }
 
     if let destination = segue.destination as? HasComicStore {
-      destination.comicStore = comicStore
+      destination.comicStore = activeStore
     }
     if let destination = segue.destination as? HasComicViewModel {
       destination.viewModel = viewModel
@@ -137,14 +141,90 @@ extension ComicCollectionViewController: UICollectionViewDelegateMagazineLayout 
   }
 }
 
-extension ComicCollectionViewController: UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
-  func updateSearchResults(for searchController: UISearchController) {
+extension ComicCollectionViewController {
+  func setupSearch() {
+    searchController.searchBar.delegate = self
+    searchController.searchBar.scopeButtonTitles = ["Text", "Comic Number"]
+  }
 
+  var activeStore: ComicStore {
+    get {
+      return searchComicStore ?? comicStore
+    }
+  }
+
+  func searchBarIsEmpty() -> Bool {
+    return searchController.searchBar.text?.isEmpty ?? true
+  }
+
+  func isSearchingComicNumber() -> Bool {
+    let searchBarScopeIsFiltering = searchController.searchBar.selectedScopeButtonIndex != 0
+    return searchController.isActive && (!searchBarIsEmpty() || searchBarScopeIsFiltering)
+  }
+
+  func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+    if searchBarIsEmpty() {
+      searchComicStore = nil
+      dataSource.comicStore = comicStore
+      collectionView.reloadData()
+    }
+    else {
+      if isSearchingComicNumber(),
+        let searchNumber = Int(searchText) {
+        showComicNumber(index: searchNumber)
+      }
+      else {
+        search(text: searchText)
+      }
+    }
+  }
+
+  func showComicNumber(index: Int) {
     var store = DependencyInjector.dependency!.resolveStore()
-    store.availableIndexes = [123, 34, 41, 34]
+    store.availableIndexes = [index]
 
-    searchDataSource = ComicCollectionDataSource(comicStore: store)
+    searchComicStore = store
+    dataSource.comicStore = store
+    collectionView.reloadData()
+  }
 
-    print("update search results")
+  func search(text: String) {
+    searchProvider.search(text: text) { [weak self] result, error in
+      guard let result = result,
+        error == nil else {
+          return
+      }
+
+      var store = DependencyInjector.dependency!.resolveStore()
+      store.availableIndexes = result.indexes
+
+      self?.searchComicStore = store
+      self?.dataSource.comicStore = store
+      self?.collectionView.reloadData()
+    }
+  }
+}
+
+extension ComicCollectionViewController: UISearchBarDelegate {
+  // MARK: - UISearchBar Delegate
+  func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    switch selectedScope {
+    case 0:
+      searchBar.keyboardType = .alphabet
+    case 1:
+      searchBar.keyboardType = .numberPad
+    default:
+      searchBar.keyboardType = .alphabet
+    }
+    searchBar.reloadInputViews()
+    filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+  }
+}
+
+extension ComicCollectionViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+    let searchBar = searchController.searchBar
+    let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+    filterContentForSearchText(searchController.searchBar.text!, scope: scope)
   }
 }

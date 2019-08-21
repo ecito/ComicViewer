@@ -10,6 +10,10 @@ import Foundation
 import Alamofire
 
 class XKCDComicNetworkAPI: ComicNetworkAPI {
+  static func search(text: String, completionHandler: @escaping (DataResponse<String>) -> Void) {
+    Alamofire.request(Router.xkcdRelevantSearch(text)).validate().responseString(completionHandler: completionHandler)
+  }
+
   static func currentComic<T>(completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {
     comic(at: nil, completionHandler: completionHandler)
   }

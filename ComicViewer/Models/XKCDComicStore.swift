@@ -23,7 +23,7 @@ class XKCDComicStore: ComicStore {
       self?.currentComic = comic
       if let comic = comic,
         comic.index > 1 {
-        self?.availableIndexes = Array(1...comic.index)
+        self?.availableIndexes = Array(1...comic.index).reversed()
       }
       completionHandler(error)
     }

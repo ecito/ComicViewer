@@ -11,7 +11,7 @@ import Foundation
 protocol Dependency {
   func resolveNetworkType() -> ComicNetworkAPI.Type
   func resolveStore() -> ComicStore
-  func resolveCache()
+  func resolveSearchProvider() -> ComicSearchProvider
 }
 
 struct DependencyInjector {

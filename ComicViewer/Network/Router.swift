@@ -11,10 +11,13 @@ import Alamofire
 
 enum Router: URLRequestConvertible {
   case xkcdComic(_ index: Int?)
+  case xkcdRelevantSearch(_ text: String)
 
   var method: HTTPMethod {
     switch self {
     case .xkcdComic:
+      return .get
+    case .xkcdRelevantSearch(_):
       return .get
     }
   }
@@ -28,6 +31,8 @@ enum Router: URLRequestConvertible {
       else {
         return "https://xkcd.com/info.0.json"
       }
+    case .xkcdRelevantSearch(let text):
+      return "https://relevantxkcd.appspot.com/process?action=xkcd&query=\(text)"
     }
   }
 
