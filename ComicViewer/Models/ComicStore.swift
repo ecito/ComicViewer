@@ -13,9 +13,11 @@ Generic comic store that could be backed by network, cache, coredata, etc
  */
 
 protocol ComicStore {
+  var availableIndexes: [Int] { get set }
   var numberOfComics: Int { get }
   var currentComic: Comic? { get }
-  func setUp(completionHandler: @escaping (Error?) -> Void)
+
+  func setUp(completionHandler: @escaping (Error?) -> Void) -> Void
 
   func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) -> Void
 }

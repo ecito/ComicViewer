@@ -9,6 +9,8 @@
 import Foundation
 
 class EmptyComicStore: ComicStore {
+  var availableIndexes: [Int] = []
+
   var numberOfComics: Int = 0
 
   var currentComic: Comic?

@@ -20,14 +20,29 @@ protocol HasComicStore: NSObject {
 
 class ComicCollectionViewController: UICollectionViewController, HasComicStore {
 
+  @IBOutlet var searchBar: UISearchBar!
+  fileprivate lazy var searchController: UISearchController = {
+    let searchController = UISearchController(searchResultsController: nil)
+    searchController.searchResultsUpdater = self
+    searchController.obscuresBackgroundDuringPresentation = false
+    searchController.searchBar.placeholder = "Search Candies"
+    navigationItem.searchController = searchController
+    definesPresentationContext = true
+    return searchController
+  }()
+
   var comicStore: ComicStore = EmptyComicStore()
-  
+
   lazy var dataSource: ComicCollectionDataSource = {
     return ComicCollectionDataSource(comicStore: self.comicStore)
   }()
 
+  var searchDataSource: ComicCollectionDataSource?
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    navigationItem.titleView = searchBar
 
     collectionView.collectionViewLayout = MagazineLayout()
     collectionView.register(ComicCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
@@ -119,5 +134,17 @@ extension ComicCollectionViewController: UICollectionViewDelegateMagazineLayout 
     -> UIEdgeInsets
   {
     return UIEdgeInsets(top: 24, left: 4, bottom: 24, right: 4)
+  }
+}
+
+extension ComicCollectionViewController: UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+
+    var store = DependencyInjector.dependency!.resolveStore()
+    store.availableIndexes = [123, 34, 41, 34]
+
+    searchDataSource = ComicCollectionDataSource(comicStore: store)
+
+    print("update search results")
   }
 }

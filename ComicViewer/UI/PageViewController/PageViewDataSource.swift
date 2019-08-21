@@ -9,15 +9,6 @@
 import UIKit
 import AlamofireImage
 
-/*
- A controller object that manages a simple model -- a collection of month names.
- 
- The controller serves as the data source for the page view controller; it therefore implements pageViewController:viewControllerBeforeViewController: and pageViewController:viewControllerAfterViewController:.
- It also implements a custom method, viewControllerAtIndex: which is useful in the implementation of the data source methods, and in the initial configuration of the application.
- 
- There is no need to actually create view controllers for each page in advance -- indeed doing so incurs unnecessary overhead. Given the data model, these methods create, configure, and return a new view controller on demand.
- */
-
 
 class PageViewDataSource: NSObject, HasComicStore {
 
@@ -30,10 +21,8 @@ class PageViewDataSource: NSObject, HasComicStore {
   }
 
   func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> ComicPageDetailViewController? {
-    // Return the data view controller for the given index.
-    guard comicStore.currentComic != nil,
-      index <= comicStore.numberOfComics else {
-        return nil
+    guard comicStore.availableIndexes.contains(index) else {
+      return nil
     }
 
     // Create a new view controller and pass suitable data.
@@ -52,34 +41,45 @@ class PageViewDataSource: NSObject, HasComicStore {
   }
 
   func indexOfViewController(_ viewController: ComicPageDetailViewController) -> Int {
-    // Return the index of the given data view controller.
     return viewController.comicIndex
   }
 }
 
 // MARK: - Page View Controller Data Source
 extension PageViewDataSource: UIPageViewControllerDataSource {
+  func indexBefore(index: Int) -> Int? {
+    guard let indexOfIndex = comicStore.availableIndexes.firstIndex(of: index) else {
+      return nil
+    }
+
+    return comicStore.availableIndexes[safe: indexOfIndex - 1]
+  }
+
+  func indexAfter(index:Int) -> Int? {
+    guard let indexOfIndex = comicStore.availableIndexes.firstIndex(of: index) else {
+      return nil
+    }
+
+    return comicStore.availableIndexes[safe: indexOfIndex + 1]
+  }
+
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-      var index = self.indexOfViewController(viewController as! ComicPageDetailViewController)
-      if (index == 1) || (index == NSNotFound) {
-          return nil
-      }
-      
-      index -= 1
-      return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)
+    let index = self.indexOfViewController(viewController as! ComicPageDetailViewController)
+
+    guard let previousIndex = indexBefore(index: index) else {
+      return nil
+    }
+
+    return self.viewControllerAtIndex(previousIndex, storyboard: viewController.storyboard!)
   }
 
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-      var index = self.indexOfViewController(viewController as! ComicPageDetailViewController)
-      if index == NSNotFound {
-          return nil
-      }
-      
-      index += 1
-      if index == self.comicStore.numberOfComics + 1 {
-          return nil
-      }
-      return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)
+    let index = self.indexOfViewController(viewController as! ComicPageDetailViewController)
+
+    guard let nextIndex = indexAfter(index: index) else {
+      return nil
+    }
+
+    return self.viewControllerAtIndex(nextIndex, storyboard: viewController.storyboard!)
   }
 }
-
