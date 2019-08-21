@@ -36,15 +36,6 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    performSegue(withIdentifier: "PushComicPage", sender: indexPath)
-    //performSegue(withIdentifier: "PushComicDetail", sender: indexPath)
-  }
-
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let indexPath = sender as? IndexPath else {
-      return
-    }
-
     comicStore.comic(at: dataSource.comicIndex(for: indexPath)) { [weak self] comic, error in
       guard let comic = comic,
         let viewModel = ComicViewModel(comic: comic),
@@ -53,13 +44,21 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
           return
       }
 
-      if let destination = segue.destination as? HasComicViewModel {
-        destination.viewModel = viewModel
-      }
-      if let destination = segue.destination as? HasComicStore,
-        let store = self?.comicStore {
-        destination.comicStore = store
-      }
+      self?.performSegue(withIdentifier: "PushComicPage", sender: viewModel)
+      //self?.performSegue(withIdentifier: "PushComicDetail", sender: indexPath)
+    }
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard let viewModel = sender as? ComicViewModel else {
+      return
+    }
+
+    if let destination = segue.destination as? HasComicStore {
+      destination.comicStore = comicStore
+    }
+    if let destination = segue.destination as? HasComicViewModel {
+      destination.viewModel = viewModel
     }
   }
 }

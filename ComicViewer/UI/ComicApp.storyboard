@@ -46,7 +46,7 @@
                         <viewLayoutGuide key="safeArea" id="cNN-Xu-7X5"/>
                     </view>
                     <connections>
-                        <segue destination="peJ-eI-saT" kind="showDetail" id="Hpi-RK-xCh"/>
+                        <segue destination="peJ-eI-saT" kind="showDetail" identifier="ShowComicPageDetail" id="Hpi-RK-xCh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LSo-Tp-Lg4" userLabel="First Responder" sceneMemberID="firstResponder"/>

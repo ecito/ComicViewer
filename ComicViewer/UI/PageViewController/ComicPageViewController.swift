@@ -57,8 +57,6 @@ class ComicPageViewController: UIViewController, HasComicViewModel, HasComicStor
     let dataSource = PageViewDataSource(store: self.comicStore)
     return dataSource
   }()
-
-  fileprivate var _modelController: PageViewDataSource? = nil
 }
 
 // MARK: - UIPageViewController delegate methods
