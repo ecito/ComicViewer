@@ -34,7 +34,8 @@ class ComicPageViewController: UIViewController, HasComicViewModel, HasComicStor
     }
 
     let startingViewController: ComicPageDetailViewController = self.dataSource.viewControllerAtIndex(startingIndex, storyboard: self.storyboard!)!
-
+    startingViewController.viewModel = viewModel
+    
     let viewControllers = [startingViewController]
     self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: {done in })
 

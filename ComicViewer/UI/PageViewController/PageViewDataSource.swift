@@ -35,10 +35,6 @@ class PageViewDataSource: NSObject, HasComicStore {
       index <= comicStore.numberOfComics else {
         return nil
     }
-//
-//    if (self.comicStore.currentComic == nil) || (index > self.comicStore.numberOfComics) {
-//        return nil
-//    }
 
     // Create a new view controller and pass suitable data.
     let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ComicPageDetailViewController

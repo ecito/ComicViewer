@@ -31,3 +31,10 @@
 	* ViewControllers so far know nothing about XKCD thanks to protocols. Just need to figure out how to dependency inject or configure app to use xkcd concretely outside of the view controller while using storyboards...
 	* Lots of cleanup in the code awaits. 
 	* Tests...
+
+### Day 2: 
+	* cleaned the code up a bit
+	* ended up using the paging view for the comic detail 
+	* showing comic details on a flip of the comic view screen (tap to flip)
+	* dependencies are injected from the app delegate
+	* made sure view work in all devices/orientations

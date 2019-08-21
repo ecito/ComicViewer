@@ -82,7 +82,7 @@ extension ComicCollectionViewController: UICollectionViewDelegateMagazineLayout 
     sizeModeForItemAt indexPath: IndexPath)
     -> MagazineLayoutItemSizeMode
   {
-    return MagazineLayoutItemSizeMode(widthMode: .halfWidth, heightMode: .dynamicAndStretchToTallestItemInRow)
+    return MagazineLayoutItemSizeMode(widthMode: .halfWidth, heightMode: .dynamic)
   }
 
   func collectionView(

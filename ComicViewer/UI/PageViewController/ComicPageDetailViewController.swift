@@ -35,6 +35,11 @@ class ComicPageDetailViewController: UIViewController, HasComicViewModel {
     render()
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    navigationController?.topViewController?.title = viewModel?.title
+  }
+
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     flip(to: .front, animated: false)
@@ -45,7 +50,7 @@ class ComicPageDetailViewController: UIViewController, HasComicViewModel {
   }
 
   fileprivate func render() {
-    guard dataLabel != nil && imageView != nil else {
+    guard imageView != nil else {
       return
     }
 
@@ -53,9 +58,7 @@ class ComicPageDetailViewController: UIViewController, HasComicViewModel {
       return
     }
 
-    navigationItem.title = viewModel.title
     detailLabel.text = viewModel.details
-    dataLabel.text = viewModel.title
     imageView.af_setImage(withURL: viewModel.url)
   }
 }

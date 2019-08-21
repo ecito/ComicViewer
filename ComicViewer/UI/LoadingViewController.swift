@@ -10,11 +10,12 @@ import UIKit
 
 class LoadingViewController: UIViewController, HasComicStore {
 
-  var comicStore: ComicStore = DependencyInjector.dependency!.resolveStore()
+  var comicStore: ComicStore = EmptyComicStore()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    comicStore = DependencyInjector.dependency!.resolveStore()
     comicStore.setUp() { [weak self] error in
       guard error == nil else {
         self?.showError()
