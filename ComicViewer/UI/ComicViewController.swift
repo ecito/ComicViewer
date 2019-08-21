@@ -38,8 +38,6 @@ class ComicViewController: UIViewController, HasComicViewModel {
 
     titleLabel.text = viewModel.title
     detailLabel.text = viewModel.details
-    if let url = viewModel.url {
-      imageView.af_setImage(withURL: url)
-    }
+    imageView.af_setImage(withURL: viewModel.url)
   }
 }

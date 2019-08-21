@@ -11,7 +11,7 @@ import Foundation
 class ComicViewModel {
   var title: String = ""
   var details: String = ""
-  var url: URL?
+  var url: URL
   var index: Int?
 
   init?(comic: Comic) {

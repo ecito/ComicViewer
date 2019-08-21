@@ -164,8 +164,23 @@
                                 <rect key="frame" x="20" y="69" width="374" height="779"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
+                            <view hidden="YES" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A1H-IT-tWQ">
+                                <rect key="frame" x="20" y="69" width="374" height="779"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="atf-Hj-naQ">
+                                        <rect key="frame" x="22" y="140" width="331" height="438"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <gestureRecognizers/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.97826086960000003" green="0.91848131079999995" blue="0.73914263440000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lfS-5W-8ps" firstAttribute="leading" secondItem="6w9-lf-RmA" secondAttribute="leading" constant="20" symbolic="YES" id="KVN-4U-dAS"/>
                             <constraint firstAttribute="bottomMargin" secondItem="qtq-Wp-cvm" secondAttribute="bottom" constant="14" id="W04-II-CZF"/>
@@ -176,15 +191,25 @@
                             <constraint firstItem="lfS-5W-8ps" firstAttribute="top" secondItem="F7j-um-6mI" secondAttribute="top" symbolic="YES" id="vd5-Dm-swG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="F7j-um-6mI"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="UaS-KR-eym" appends="YES" id="Rff-Sb-OrS"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="dataLabel" destination="lfS-5W-8ps" id="dgY-rQ-sl5"/>
+                        <outlet property="detailLabel" destination="atf-Hj-naQ" id="4fY-gL-Kkk"/>
+                        <outlet property="detailView" destination="A1H-IT-tWQ" id="AZK-53-YMU"/>
                         <outlet property="imageView" destination="qtq-Wp-cvm" id="woQ-cv-jGp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VKZ-14-3fh" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UaS-KR-eym">
+                    <connections>
+                        <action selector="viewTapped:" destination="peJ-eI-saT" id="0L1-1G-VmJ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2893" y="-978"/>
+            <point key="canvasLocation" x="2892.753623188406" y="-978.34821428571422"/>
         </scene>
     </scenes>
 </document>
