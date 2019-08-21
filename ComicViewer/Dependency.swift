@@ -9,8 +9,11 @@
 import Foundation
 
 protocol Dependency {
+  func resolveNetworkType() -> ComicNetworkAPI.Type
+  func resolveStore() -> ComicStore
+  func resolveCache()
 }
 
 struct DependencyInjector {
-  static var dependencies: Dependency?
+  static var dependency: Dependency?
 }

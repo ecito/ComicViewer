@@ -10,8 +10,7 @@ import UIKit
 
 class LoadingViewController: UIViewController, HasComicStore {
 
-  // TODO: figure out how to dependency inject this guy
-  var comicStore: ComicStore = XKCDComicStore()
+  var comicStore: ComicStore = DependencyInjector.dependency!.resolveStore()
 
   override func viewDidLoad() {
     super.viewDidLoad()

@@ -21,14 +21,14 @@ class XKCDComicStore: ComicStore {
   var currentComic: Comic?
 
   func setUp(completionHandler: @escaping (Error?) -> Void) {
-    comic(at: nil) { comic, error in
-      self.currentComic = comic
+    comic(at: nil) { [weak self] comic, error in
+      self?.currentComic = comic
       completionHandler(error)
     }
   }
 
   func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) -> Void {
-    XKCDComicNetworkAPI.comic(at: index) { (response: DataResponse<XKCDComic>) in
+    DependencyInjector.dependency?.resolveNetworkType().comic(at: index) { (response: DataResponse<XKCDComic>) in
       guard response.error == nil else {
         completionHandler(nil, response.error)
         return
