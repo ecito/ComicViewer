@@ -8,48 +8,40 @@
 
 import UIKit
 
-class ComicPageViewController: UIViewController, UIPageViewControllerDelegate {
+class ComicPageViewController: UIViewController {
 
-  var pageViewController: UIPageViewController?
+  fileprivate var pageViewController: UIPageViewController?
 
   var comicStore: ComicStore?
 
+  var startingComicIndex: Int?
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
-    // Configure the page view controller and add it as a child view controller.
 
-    comicStore = XKCDComicStore()
-    comicStore?.setUp() { [weak self] error in
-      guard error == nil else {
-        self?.showError()
-        return
-      }
-
-      self?.setupPageController()
-    }
+    setupPageController()
   }
 
-  func showError() {
+  fileprivate func showError() {
     self.view.backgroundColor = .red
   }
 
-  func setupPageController() {
+  fileprivate func setupPageController() {
     self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     self.pageViewController!.delegate = self
 
-    guard let currentComicIndex = comicStore?.currentComic?.index else {
+    guard let currentComicIndex = startingComicIndex ?? comicStore?.currentComic?.index else {
       return
     }
 
-    let startingViewController: ComicPageDetailViewController = self.modelController.viewControllerAtIndex(currentComicIndex, storyboard: self.storyboard!)!
+    let startingViewController: ComicPageDetailViewController = self.dataSource.viewControllerAtIndex(currentComicIndex, storyboard: self.storyboard!)!
 
     startingViewController.comicIndex = currentComicIndex
 
     let viewControllers = [startingViewController]
     self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: {done in })
 
-    self.pageViewController!.dataSource = self.modelController
+    self.pageViewController!.dataSource = self.dataSource
 
     self.addChild(self.pageViewController!)
     self.view.addSubview(self.pageViewController!.view)
@@ -64,19 +56,17 @@ class ComicPageViewController: UIViewController, UIPageViewControllerDelegate {
     self.pageViewController!.didMove(toParent: self)
   }
 
-  var modelController: PageViewDataSource {
-    // Return the model controller object, creating it if necessary.
-    // In more complex implementations, the model controller may be passed to the view controller.
-    if _modelController == nil {
-      _modelController = PageViewDataSource(store: self.comicStore!)
-    }
-    return _modelController!
-  }
+  fileprivate lazy var dataSource: PageViewDataSource = {
+    let dataSource = PageViewDataSource(store: self.comicStore!)
+    return dataSource
+  }()
 
-  var _modelController: PageViewDataSource? = nil
+  fileprivate var _modelController: PageViewDataSource? = nil
+}
 
-  // MARK: - UIPageViewController delegate methods
-
+// MARK: - UIPageViewController delegate methods
+// xcode template code... 
+extension ComicPageViewController: UIPageViewControllerDelegate {
   func pageViewController(_ pageViewController: UIPageViewController, spineLocationFor orientation: UIInterfaceOrientation) -> UIPageViewController.SpineLocation {
     if (orientation == .portrait) || (orientation == .portraitUpsideDown) || (UIDevice.current.userInterfaceIdiom == .phone) {
         // In portrait orientation or on iPhone: Set the spine position to "min" and the page view controller's view controllers array to contain just one view controller. Setting the spine position to 'UIPageViewController.SpineLocation.mid' in landscape orientation sets the doubleSided property to true, so set it to false here.
@@ -92,19 +82,17 @@ class ComicPageViewController: UIViewController, UIPageViewControllerDelegate {
     let currentViewController = self.pageViewController!.viewControllers![0] as! ComicPageDetailViewController
     var viewControllers: [UIViewController]
 
-    let indexOfCurrentViewController = self.modelController.indexOfViewController(currentViewController)
+    let indexOfCurrentViewController = self.dataSource.indexOfViewController(currentViewController)
     if (indexOfCurrentViewController == 0) || (indexOfCurrentViewController % 2 == 0) {
-        let nextViewController = self.modelController.pageViewController(self.pageViewController!, viewControllerAfter: currentViewController)
+        let nextViewController = self.dataSource.pageViewController(self.pageViewController!, viewControllerAfter: currentViewController)
         viewControllers = [currentViewController, nextViewController!]
     } else {
-        let previousViewController = self.modelController.pageViewController(self.pageViewController!, viewControllerBefore: currentViewController)
+        let previousViewController = self.dataSource.pageViewController(self.pageViewController!, viewControllerBefore: currentViewController)
         viewControllers = [previousViewController!, currentViewController]
     }
     self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: true, completion: {done in })
 
     return .mid
   }
-
-
 }
 

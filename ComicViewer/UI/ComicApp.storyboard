@@ -35,6 +35,21 @@
             </objects>
             <point key="canvasLocation" x="-444.92753623188412" y="-264.50892857142856"/>
         </scene>
+        <!--Comic Page View Controller-->
+        <scene sceneID="Z07-ci-tsa">
+            <objects>
+                <viewController id="ZnZ-UL-33x" customClass="ComicPageViewController" customModule="ComicViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZlO-lF-dh4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="cNN-Xu-7X5"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LSo-Tp-Lg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2055" y="-978"/>
+        </scene>
         <!--Comic Collection View Controller-->
         <scene sceneID="IMc-l3-f8Z">
             <objects>
@@ -58,6 +73,7 @@
                     <navigationItem key="navigationItem" id="o8i-9F-3dl"/>
                     <connections>
                         <segue destination="zfU-d0-deA" kind="show" identifier="PushComicDetail" id="fx2-Be-7Tf"/>
+                        <segue destination="ZnZ-UL-33x" kind="show" identifier="PushComicPage" id="dm7-Lu-i0y"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fue-AN-XR4" userLabel="First Responder" sceneMemberID="firstResponder"/>

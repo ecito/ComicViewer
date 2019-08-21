@@ -8,6 +8,10 @@
 
 import Foundation
 
+/*
+Generic comic store that could be backed by network, cache, coredata, etc
+ */
+
 protocol ComicStore {
   var numberOfComics: Int { get }
   var currentComic: Comic? { get }

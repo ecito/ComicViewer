@@ -19,7 +19,7 @@ import AlamofireImage
  */
 
 
-class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
+class PageViewDataSource: NSObject {
 
   var comicStore: ComicStore
 
@@ -39,16 +39,13 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
     let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ComicPageDetailViewController
     dataViewController.comicIndex = index
     comicStore.comic(at: index) { comic, error in
-      if let comic = comic {
-        let viewModel = ComicViewModel()
-        viewModel.title = comic.title
-        viewModel.details = comic.details
-        if let url = URL(string: comic.imageURL) {
-          viewModel.URL = url
-        }
-
-        dataViewController.viewModel = viewModel
+      guard let comic = comic,
+      let viewModel = ComicViewModel(comic: comic),
+      error == nil else {
+        return
       }
+
+      dataViewController.viewModel = viewModel
     }
 
     return dataViewController
@@ -59,9 +56,10 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
     // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
     return viewController.comicIndex
   }
+}
 
-  // MARK: - Page View Controller Data Source
-
+// MARK: - Page View Controller Data Source
+extension PageViewDataSource: UIPageViewControllerDataSource {
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
       var index = self.indexOfViewController(viewController as! ComicPageDetailViewController)
       if (index == 1) || (index == NSNotFound) {
@@ -84,6 +82,5 @@ class PageViewDataSource: NSObject, UIPageViewControllerDataSource {
       }
       return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)
   }
-
 }
 

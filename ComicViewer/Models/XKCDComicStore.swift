@@ -21,19 +21,9 @@ class XKCDComicStore: ComicStore {
   var currentComic: Comic?
 
   func setUp(completionHandler: @escaping (Error?) -> Void) {
-    XKCDComicNetworkAPI.currentComic { (response: DataResponse<XKCDComic>) in
-      guard response.error == nil else {
-        completionHandler(response.error)
-        return
-      }
-
-      guard let comic = response.value else {
-        print("no comic?")
-        return
-      }
-
+    comic(at: nil) { comic, error in
       self.currentComic = comic
-      completionHandler(nil)
+      completionHandler(error)
     }
   }
 

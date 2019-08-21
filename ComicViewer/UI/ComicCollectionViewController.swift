@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 import MagazineLayout
 
+protocol ComicViewHasViewModel: NSObject {
+  var viewModel: ComicViewModel? { get set }
+}
+
 class ComicCollectionViewController: UICollectionViewController {
 
   var comicStore: ComicStore = EmptyComicStore()
@@ -32,19 +36,20 @@ class ComicCollectionViewController: UICollectionViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let destination = segue.destination as? ComicViewController,
-      let indexPath = sender as? IndexPath {
-      comicStore.comic(at: dataSource.comicIndex(for: indexPath)) { comic, error in
-        if let comic = comic {
-          let viewModel = ComicViewModel()
-          viewModel.title = comic.title
-          viewModel.details = comic.details
-          if let url = URL(string: comic.imageURL) {
-            viewModel.URL = url
-          }
+    guard let indexPath = sender as? IndexPath else {
+      return
+    }
 
-          destination.viewModel = viewModel
+    if let destination = segue.destination as? ComicViewHasViewModel {
+      comicStore.comic(at: dataSource.comicIndex(for: indexPath)) { comic, error in
+        guard let comic = comic,
+          let viewModel = ComicViewModel(comic: comic),
+          error == nil else {
+            // show error
+            return
         }
+
+        destination.viewModel = viewModel
       }
     }
   }
@@ -70,7 +75,6 @@ extension ComicCollectionViewController: UICollectionViewDelegateMagazineLayout 
     -> MagazineLayoutItemSizeMode
   {
     return MagazineLayoutItemSizeMode(widthMode: .halfWidth, heightMode: .dynamicAndStretchToTallestItemInRow)
-//    return MagazineLayoutItemSizeMode(widthMode: .fullWidth(respectsHorizontalInsets: true), heightMode: .dynamicAndStretchToTallestItemInRow)
   }
 
   func collectionView(
@@ -108,5 +112,4 @@ extension ComicCollectionViewController: UICollectionViewDelegateMagazineLayout 
   {
     return UIEdgeInsets(top: 24, left: 4, bottom: 24, right: 4)
   }
-
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ComicViewController: UIViewController {
+class ComicViewController: UIViewController, ComicViewHasViewModel {
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var imageView: UIImageView!
@@ -27,14 +27,19 @@ class ComicViewController: UIViewController {
   }
 
   func render() {
-    if titleLabel != nil && imageView != nil {
-      if let viewModel = viewModel {
-        titleLabel.text = viewModel.title
-        detailLabel.text = viewModel.details
-        if let URL = viewModel.URL {
-          imageView.af_setImage(withURL: URL)
-        }
-      }
+    guard titleLabel != nil,
+      imageView != nil else {
+        return
+    }
+
+    guard let viewModel = viewModel else {
+      return
+    }
+
+    titleLabel.text = viewModel.title
+    detailLabel.text = viewModel.details
+    if let url = viewModel.url {
+      imageView.af_setImage(withURL: url)
     }
   }
 }

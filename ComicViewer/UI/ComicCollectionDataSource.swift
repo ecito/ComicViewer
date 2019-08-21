@@ -41,11 +41,12 @@ class ComicCollectionDataSource: NSObject, UICollectionViewDataSource {
 
         if let URL = URL(string: comic.imageURL) {
           cell.imageView.af_setImage(withURL: URL, placeholderImage: UIImage(named: "loading")) { response in
-            collectionView.collectionViewLayout.invalidateLayout()
+            //collectionView.collectionViewLayout.invalidateLayout()
           }
         }
       }
     }
+
     return cell
   }
 }
