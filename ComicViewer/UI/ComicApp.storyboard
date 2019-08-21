@@ -78,58 +78,12 @@
                     </collectionView>
                     <navigationItem key="navigationItem" title="XKCD" id="o8i-9F-3dl"/>
                     <connections>
-                        <segue destination="zfU-d0-deA" kind="show" identifier="PushComicDetail" id="fx2-Be-7Tf"/>
                         <segue destination="ZnZ-UL-33x" kind="show" identifier="PushComicPage" id="dm7-Lu-i0y"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fue-AN-XR4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1249.2753623188407" y="-275.22321428571428"/>
-        </scene>
-        <!--Comic View Controller-->
-        <scene sceneID="OKs-3N-m2t">
-            <objects>
-                <viewController id="zfU-d0-deA" customClass="ComicViewController" customModule="ComicViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2iD-TG-JOJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CcC-8v-M3F">
-                                <rect key="frame" x="198" y="355" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="asdf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VF6-Af-Rxk">
-                                <rect key="frame" x="20" y="679" width="374" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3Mm-3e-I5s">
-                                <rect key="frame" x="20" y="718" width="374" height="124"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f20-ss-yCW">
-                                <rect key="frame" x="0.0" y="88" width="414" height="558"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="safeArea" id="po5-4I-93I"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Lox-bP-JmJ"/>
-                    </view>
-                    <connections>
-                        <outlet property="detailLabel" destination="3Mm-3e-I5s" id="lLU-G9-3Eo"/>
-                        <outlet property="imageView" destination="f20-ss-yCW" id="BrB-JS-tFz"/>
-                        <outlet property="titleLabel" destination="VF6-Af-Rxk" id="TWE-fd-JhO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Mq-Cc-WPQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2055.072463768116" y="-273.21428571428572"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="u3g-5D-WZd">

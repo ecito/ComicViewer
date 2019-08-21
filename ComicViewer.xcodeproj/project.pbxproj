@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6517BB3A230C8F1C005CEFED /* ComicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6517BB38230C8F1C005CEFED /* ComicViewController.swift */; };
 		6517BB3E230D513D005CEFED /* ScaledHeightImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6517BB3D230D513D005CEFED /* ScaledHeightImageView.swift */; };
 		6517BB40230D8BA5005CEFED /* XKCDDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6517BB3F230D8BA5005CEFED /* XKCDDependency.swift */; };
 		6517BB44230DA5EF005CEFED /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6517BB43230DA5EF005CEFED /* Configuration.swift */; };
@@ -56,7 +55,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6517BB38230C8F1C005CEFED /* ComicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicViewController.swift; sourceTree = "<group>"; };
 		6517BB3D230D513D005CEFED /* ScaledHeightImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledHeightImageView.swift; sourceTree = "<group>"; };
 		6517BB3F230D8BA5005CEFED /* XKCDDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XKCDDependency.swift; sourceTree = "<group>"; };
 		6517BB43230DA5EF005CEFED /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
@@ -240,7 +238,6 @@
 				6596E8EC230C45FA001CA848 /* ComicCollectionDataSource.swift */,
 				6596E8EE230C49B8001CA848 /* ComicCollectionViewCell.swift */,
 				6596E8F2230C4C64001CA848 /* LoadingViewController.swift */,
-				6517BB38230C8F1C005CEFED /* ComicViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -376,7 +373,6 @@
 				6596E8D8230BFC05001CA848 /* Router.swift in Sources */,
 				6596E8E3230C209F001CA848 /* XKCDComicStore.swift in Sources */,
 				6517BB68230DDAD8005CEFED /* XKCDRelevantComicSearchProvider.swift in Sources */,
-				6517BB3A230C8F1C005CEFED /* ComicViewController.swift in Sources */,
 				6596E8F7230C5113001CA848 /* EmptyComicStore.swift in Sources */,
 				6517BB62230DD8D0005CEFED /* XKCDComicSearchResult.swift in Sources */,
 				6596E8C3230B1333001CA848 /* Model.swift in Sources */,
