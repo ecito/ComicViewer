@@ -18,12 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RYF-tc-GQY">
-                                <rect key="frame" x="197" y="390" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RYF-tc-GQY">
+                                <rect key="frame" x="438" y="197" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RYF-tc-GQY" firstAttribute="centerY" secondItem="W3m-yd-QQJ" secondAttribute="centerY" id="PGh-jM-DNf"/>
+                            <constraint firstItem="RYF-tc-GQY" firstAttribute="centerX" secondItem="W3m-yd-QQJ" secondAttribute="centerX" id="Ru1-7c-ALu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6EN-ft-fzv"/>
                     </view>
                     <navigationItem key="navigationItem" id="MoE-cu-sWW"/>
