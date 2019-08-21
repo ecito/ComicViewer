@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ComicViewController: UIViewController, ComicViewHasViewModel {
+class ComicViewController: UIViewController, HasComicViewModel {
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var imageView: UIImageView!

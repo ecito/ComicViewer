@@ -19,7 +19,7 @@ import AlamofireImage
  */
 
 
-class PageViewDataSource: NSObject {
+class PageViewDataSource: NSObject, HasComicStore {
 
   var comicStore: ComicStore
 
@@ -31,13 +31,17 @@ class PageViewDataSource: NSObject {
 
   func viewControllerAtIndex(_ index: Int, storyboard: UIStoryboard) -> ComicPageDetailViewController? {
     // Return the data view controller for the given index.
-    if (self.comicStore.currentComic == nil) || (index > self.comicStore.numberOfComics) {
+    guard comicStore.currentComic != nil,
+      index <= comicStore.numberOfComics else {
         return nil
     }
+//
+//    if (self.comicStore.currentComic == nil) || (index > self.comicStore.numberOfComics) {
+//        return nil
+//    }
 
     // Create a new view controller and pass suitable data.
     let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ComicPageDetailViewController
-    dataViewController.comicIndex = index
     comicStore.comic(at: index) { comic, error in
       guard let comic = comic,
       let viewModel = ComicViewModel(comic: comic),
@@ -53,7 +57,6 @@ class PageViewDataSource: NSObject {
 
   func indexOfViewController(_ viewController: ComicPageDetailViewController) -> Int {
     // Return the index of the given data view controller.
-    // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
     return viewController.comicIndex
   }
 }

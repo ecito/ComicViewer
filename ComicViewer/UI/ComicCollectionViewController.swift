@@ -10,11 +10,15 @@ import Foundation
 import UIKit
 import MagazineLayout
 
-protocol ComicViewHasViewModel: NSObject {
+protocol HasComicViewModel: NSObject {
   var viewModel: ComicViewModel? { get set }
 }
 
-class ComicCollectionViewController: UICollectionViewController {
+protocol HasComicStore: NSObject {
+  var comicStore: ComicStore { get set }
+}
+
+class ComicCollectionViewController: UICollectionViewController, HasComicStore {
 
   var comicStore: ComicStore = EmptyComicStore()
   
@@ -32,7 +36,8 @@ class ComicCollectionViewController: UICollectionViewController {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    performSegue(withIdentifier: "PushComicDetail", sender: indexPath)
+    performSegue(withIdentifier: "PushComicPage", sender: indexPath)
+    //performSegue(withIdentifier: "PushComicDetail", sender: indexPath)
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,16 +45,20 @@ class ComicCollectionViewController: UICollectionViewController {
       return
     }
 
-    if let destination = segue.destination as? ComicViewHasViewModel {
-      comicStore.comic(at: dataSource.comicIndex(for: indexPath)) { comic, error in
-        guard let comic = comic,
-          let viewModel = ComicViewModel(comic: comic),
-          error == nil else {
-            // show error
-            return
-        }
+    comicStore.comic(at: dataSource.comicIndex(for: indexPath)) { [weak self] comic, error in
+      guard let comic = comic,
+        let viewModel = ComicViewModel(comic: comic),
+        error == nil else {
+          // show error
+          return
+      }
 
+      if let destination = segue.destination as? HasComicViewModel {
         destination.viewModel = viewModel
+      }
+      if let destination = segue.destination as? HasComicStore,
+        let store = self?.comicStore {
+        destination.comicStore = store
       }
     }
   }

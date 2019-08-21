@@ -12,8 +12,10 @@ class ComicViewModel {
   var title: String = ""
   var details: String = ""
   var url: URL?
+  var index: Int?
 
   init?(comic: Comic) {
+    self.index = comic.index
     self.title = comic.title
     self.details = comic.details
     if let url = URL(string: comic.imageURL) {

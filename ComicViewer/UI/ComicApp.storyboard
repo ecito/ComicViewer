@@ -45,6 +45,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="cNN-Xu-7X5"/>
                     </view>
+                    <connections>
+                        <segue destination="peJ-eI-saT" kind="showDetail" id="Hpi-RK-xCh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LSo-Tp-Lg4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,6 +145,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8i1-Le-My6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="339.13043478260875" y="-275.22321428571428"/>
+        </scene>
+        <!--Comic Page Detail View Controller-->
+        <scene sceneID="Ubb-KQ-0l8">
+            <objects>
+                <viewController storyboardIdentifier="DataViewController" id="peJ-eI-saT" customClass="ComicPageDetailViewController" customModule="ComicViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="6w9-lf-RmA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lfS-5W-8ps">
+                                <rect key="frame" x="20" y="44" width="374" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="qtq-Wp-cvm" customClass="UIImageView">
+                                <rect key="frame" x="20" y="69" width="374" height="779"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97826086960000003" green="0.91848131079999995" blue="0.73914263440000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lfS-5W-8ps" firstAttribute="leading" secondItem="6w9-lf-RmA" secondAttribute="leading" constant="20" symbolic="YES" id="KVN-4U-dAS"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="qtq-Wp-cvm" secondAttribute="bottom" constant="14" id="W04-II-CZF"/>
+                            <constraint firstAttribute="trailing" secondItem="qtq-Wp-cvm" secondAttribute="trailing" constant="20" symbolic="YES" id="Xxv-jI-QMy"/>
+                            <constraint firstAttribute="trailing" secondItem="lfS-5W-8ps" secondAttribute="trailing" constant="20" symbolic="YES" id="gAV-ZG-row"/>
+                            <constraint firstItem="qtq-Wp-cvm" firstAttribute="leading" secondItem="6w9-lf-RmA" secondAttribute="leading" constant="20" symbolic="YES" id="nUf-X8-mkl"/>
+                            <constraint firstItem="qtq-Wp-cvm" firstAttribute="top" secondItem="lfS-5W-8ps" secondAttribute="bottom" constant="8" symbolic="YES" id="p6T-eM-mdM"/>
+                            <constraint firstItem="lfS-5W-8ps" firstAttribute="top" secondItem="F7j-um-6mI" secondAttribute="top" symbolic="YES" id="vd5-Dm-swG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="F7j-um-6mI"/>
+                    </view>
+                    <connections>
+                        <outlet property="dataLabel" destination="lfS-5W-8ps" id="dgY-rQ-sl5"/>
+                        <outlet property="imageView" destination="qtq-Wp-cvm" id="woQ-cv-jGp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VKZ-14-3fh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2893" y="-978"/>
         </scene>
     </scenes>
 </document>

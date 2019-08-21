@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import AlamofireImage
 
-class ComicCollectionDataSource: NSObject, UICollectionViewDataSource {
+class ComicCollectionDataSource: NSObject, UICollectionViewDataSource, HasComicStore {
 
   var comicStore: ComicStore
 

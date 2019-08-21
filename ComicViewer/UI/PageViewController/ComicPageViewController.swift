@@ -8,13 +8,12 @@
 
 import UIKit
 
-class ComicPageViewController: UIViewController {
-
+class ComicPageViewController: UIViewController, HasComicViewModel, HasComicStore {
   fileprivate var pageViewController: UIPageViewController?
 
-  var comicStore: ComicStore?
+  var viewModel: ComicViewModel?
 
-  var startingComicIndex: Int?
+  var comicStore: ComicStore = EmptyComicStore()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,13 +29,11 @@ class ComicPageViewController: UIViewController {
     self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     self.pageViewController!.delegate = self
 
-    guard let currentComicIndex = startingComicIndex ?? comicStore?.currentComic?.index else {
+    guard let startingIndex = viewModel?.index ?? comicStore.currentComic?.index else {
       return
     }
 
-    let startingViewController: ComicPageDetailViewController = self.dataSource.viewControllerAtIndex(currentComicIndex, storyboard: self.storyboard!)!
-
-    startingViewController.comicIndex = currentComicIndex
+    let startingViewController: ComicPageDetailViewController = self.dataSource.viewControllerAtIndex(startingIndex, storyboard: self.storyboard!)!
 
     let viewControllers = [startingViewController]
     self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: {done in })
@@ -57,7 +54,7 @@ class ComicPageViewController: UIViewController {
   }
 
   fileprivate lazy var dataSource: PageViewDataSource = {
-    let dataSource = PageViewDataSource(store: self.comicStore!)
+    let dataSource = PageViewDataSource(store: self.comicStore)
     return dataSource
   }()
 

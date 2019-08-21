@@ -13,7 +13,6 @@
 		6596E89D230B0360001CA848 /* ComicPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E89C230B0360001CA848 /* ComicPageViewController.swift */; };
 		6596E89F230B0360001CA848 /* ComicPageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E89E230B0360001CA848 /* ComicPageDetailViewController.swift */; };
 		6596E8A1230B0360001CA848 /* PageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8A0230B0360001CA848 /* PageViewDataSource.swift */; };
-		6596E8A4230B0360001CA848 /* PageViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6596E8A2230B0360001CA848 /* PageViewController.storyboard */; };
 		6596E8A6230B0361001CA848 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6596E8A5230B0361001CA848 /* Assets.xcassets */; };
 		6596E8A9230B0361001CA848 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6596E8A7230B0361001CA848 /* LaunchScreen.storyboard */; };
 		6596E8B4230B0361001CA848 /* ComicViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8B3230B0361001CA848 /* ComicViewerTests.swift */; };
@@ -56,7 +55,6 @@
 		6596E89C230B0360001CA848 /* ComicPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicPageViewController.swift; sourceTree = "<group>"; };
 		6596E89E230B0360001CA848 /* ComicPageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicPageDetailViewController.swift; sourceTree = "<group>"; };
 		6596E8A0230B0360001CA848 /* PageViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewDataSource.swift; sourceTree = "<group>"; };
-		6596E8A3230B0360001CA848 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PageViewController.storyboard; sourceTree = "<group>"; };
 		6596E8A5230B0361001CA848 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6596E8A8230B0361001CA848 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6596E8AA230B0361001CA848 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -201,7 +199,6 @@
 		6596E8E6230C4387001CA848 /* PageViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6596E8A2230B0360001CA848 /* PageViewController.storyboard */,
 				6596E89C230B0360001CA848 /* ComicPageViewController.swift */,
 				6596E89E230B0360001CA848 /* ComicPageDetailViewController.swift */,
 				6596E8A0230B0360001CA848 /* PageViewDataSource.swift */,
@@ -309,7 +306,6 @@
 				6596E8A9230B0361001CA848 /* LaunchScreen.storyboard in Resources */,
 				6596E8A6230B0361001CA848 /* Assets.xcassets in Resources */,
 				6596E8E8230C43E2001CA848 /* ComicApp.storyboard in Resources */,
-				6596E8A4230B0360001CA848 /* PageViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,14 +392,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6596E8A2230B0360001CA848 /* PageViewController.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6596E8A3230B0360001CA848 /* Base */,
-			);
-			name = PageViewController.storyboard;
-			sourceTree = "<group>";
-		};
 		6596E8A7230B0361001CA848 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

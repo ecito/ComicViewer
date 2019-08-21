@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoadingViewController: UIViewController {
+class LoadingViewController: UIViewController, HasComicStore {
 
   // TODO: figure out how to dependency inject this guy
   var comicStore: ComicStore = XKCDComicStore()

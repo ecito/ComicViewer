@@ -8,12 +8,17 @@
 
 import UIKit
 
-class ComicPageDetailViewController: UIViewController, ComicViewHasViewModel {
+class ComicPageDetailViewController: UIViewController, HasComicViewModel {
 
   @IBOutlet weak var dataLabel: UILabel!
   @IBOutlet weak var imageView: UIImageView!
 
-  var comicIndex: Int = NSNotFound
+  var comicIndex: Int {
+    guard let index = viewModel?.index else {
+      return NSNotFound
+    }
+    return index
+  }
 
   var viewModel: ComicViewModel? {
     didSet {
