@@ -26,7 +26,7 @@ class ComicPageViewController: UIViewController, HasComicViewModel, HasComicStor
   }
 
   fileprivate func setupPageController() {
-    self.pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+    self.pageViewController = UIPageViewController(transitionStyle: Configuration.pageTransitionStyle(), navigationOrientation: .horizontal, options: nil)
     self.pageViewController!.delegate = self
 
     guard let startingIndex = viewModel?.index ?? comicStore.currentComic?.index else {
@@ -35,7 +35,7 @@ class ComicPageViewController: UIViewController, HasComicViewModel, HasComicStor
 
     let startingViewController: ComicPageDetailViewController = self.dataSource.viewControllerAtIndex(startingIndex, storyboard: self.storyboard!)!
     startingViewController.viewModel = viewModel
-    
+
     let viewControllers = [startingViewController]
     self.pageViewController!.setViewControllers(viewControllers, direction: .forward, animated: false, completion: {done in })
 
