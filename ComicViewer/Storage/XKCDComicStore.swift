@@ -42,8 +42,7 @@ class XKCDComicStore: ComicStore {
       }
 
       guard let comic = response.value else {
-        completionHandler(nil, nil)
-        print("no comic? waaa")
+        completionHandler(nil, ComicError.someError("no comic found"))
         return
       }
 

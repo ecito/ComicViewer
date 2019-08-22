@@ -11,7 +11,14 @@ import Alamofire
 
 class XKCDComicNetworkAPI: ComicNetworkAPI {
   static func search(text: String, completionHandler: @escaping (DataResponse<String>) -> Void) {
-    Alamofire.request(Router.xkcdRelevantSearch(text)).validate().responseString(completionHandler: completionHandler)
+    if let sanitizedText = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+      Alamofire.request(Router.xkcdRelevantSearch(sanitizedText)).validate().responseString(completionHandler: completionHandler)
+    }
+    else {
+      let result = Result<String> { throw ComicError.someError("no text to search") }
+      let response = DataResponse(request: nil, response: nil, data: nil, result: result)
+      completionHandler(response)
+    }
   }
 
   static func currentComic<T>(completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {

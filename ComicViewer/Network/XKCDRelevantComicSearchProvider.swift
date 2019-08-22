@@ -15,15 +15,18 @@ class XKCDRelevantComicSearchProvider: ComicSearchProvider {
       return nil
     }
 
+    // use relevance > 0 to know if we got valid results or not
     let relevance = array[safe: 0]?.trimmingCharacters(in: .whitespacesAndNewlines)
 
     guard relevance != "0.0" else {
       return nil
     }
-    
+
+    // grab the results from the 3rd line onwards
     let hits = Array(array[2...array.count - 1])
 
     let indexes = hits.compactMap { line -> Int? in
+      // we just care about the number at the beggining of each line
       if let indexString = line.components(separatedBy: " ").first,
         let index = Int(indexString) {
         return index
@@ -43,19 +46,20 @@ class XKCDRelevantComicSearchProvider: ComicSearchProvider {
   }
 
   func search(text: String, completionHandler: @escaping (ComicSearchResult?, Error?) -> Void) {
-    XKCDComicNetworkAPI.search(text: text) { [weak self] response in
-      guard let responseString = response.value else {
-        completionHandler(nil, nil)
-        return
-      }
-
+    let network = DependencyInjector.dependency!.resolveNetworkType()
+    network.search(text: text) { [weak self] response in
       guard response.error == nil else {
         completionHandler(nil, response.error)
         return
       }
 
+      guard let responseString = response.value else {
+        completionHandler(nil, ComicError.someError("no response string"))
+        return
+      }
+
       guard let indexes = self?.searchResultFromResponse(response: responseString) else {
-        completionHandler(nil, nil)
+        completionHandler(nil, ComicError.someError("search result parsing error"))
         return
       }
 

@@ -32,6 +32,7 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
   }()
 
   var comicStore: ComicStore = EmptyComicStore()
+  var searchComicStore: ComicStore?
 
   lazy var dataSource: ComicCollectionDataSource = {
     return ComicCollectionDataSource(comicStore: self.comicStore)
@@ -40,8 +41,6 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
   lazy var searchProvider: ComicSearchProvider = {
     return DependencyInjector.dependency!.resolveSearchProvider()
   }()
-
-  var searchComicStore: ComicStore?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -64,7 +63,6 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
       }
 
       self?.performSegue(withIdentifier: "PushComicPage", sender: viewModel)
-      //self?.performSegue(withIdentifier: "PushComicDetail", sender: indexPath)
     }
   }
 

@@ -9,3 +9,7 @@
 import Foundation
 
 protocol Model: Codable {}
+
+enum ComicError: Error {
+  case someError(String)
+}
