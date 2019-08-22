@@ -38,3 +38,5 @@
 	* showing comic details on a flip of the comic view screen (tap to flip)
 	* dependencies are injected from the app delegate
 	* made sure view work in all devices/orientations
+	* decided to add search functionality as it seemed most interesting. if time allowed I'd go for favoriting next
+	* added some mocks and tests, though having a hard time figuring out what to test exactly
