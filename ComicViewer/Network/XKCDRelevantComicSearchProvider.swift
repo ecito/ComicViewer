@@ -47,22 +47,16 @@ class XKCDRelevantComicSearchProvider: ComicSearchProvider {
 
   func search(text: String, completionHandler: @escaping (ComicSearchResult?, Error?) -> Void) {
     let network = DependencyInjector.dependency!.resolveNetworkType()
-    network.search(text: text) { [weak self] response in
-      guard response.error == nil else {
-        completionHandler(nil, response.error)
-        return
+    network.search(text: text) { [weak self] result in
+      
+      guard case let .success(string) = result,
+        let indexes = self?.searchResultFromResponse(response: string)
+        else {
+          
+          completionHandler(nil, ComicError.someError("some error"))
+          return
       }
-
-      guard let responseString = response.value else {
-        completionHandler(nil, ComicError.someError("no response string"))
-        return
-      }
-
-      guard let indexes = self?.searchResultFromResponse(response: responseString) else {
-        completionHandler(nil, ComicError.someError("search result parsing error"))
-        return
-      }
-
+      
       completionHandler(indexes, nil)
     }
   }

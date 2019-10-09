@@ -17,7 +17,7 @@ protocol ComicStore {
   var numberOfComics: Int { get }
   var currentComic: Comic? { get }
 
-  func setUp(completionHandler: @escaping (Error?) -> Void) -> Void
+  func setUp(completionHandler: @escaping (Result<Void, ComicError>) -> Void) -> Void
 
-  func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) -> Void
+  func comic<T>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) -> Void where T : Comic
 }

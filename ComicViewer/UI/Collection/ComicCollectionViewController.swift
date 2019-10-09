@@ -54,15 +54,15 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
   }
 
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    activeStore.comic(at: dataSource.comicIndex(for: indexPath)) { [weak self] comic, error in
-      guard let comic = comic,
-        let viewModel = ComicViewModel(comic: comic),
-        error == nil else {
-          // show error
-          return
+    activeStore.comic(at: dataSource.comicIndex(for: indexPath)) { [weak self] (result: Result<XKCDComic, ComicError>) in
+      switch result {
+      case .success(let comic):
+        if let viewModel = ComicViewModel(comic: comic) {
+          self?.performSegue(withIdentifier: "PushComicPage", sender: viewModel)
+        }
+      case .failure:
+        print("error")
       }
-
-      self?.performSegue(withIdentifier: "PushComicPage", sender: viewModel)
     }
   }
 

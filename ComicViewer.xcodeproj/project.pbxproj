@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		6517BB84230E0BD5005CEFED /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8D5230BF6AF001CA848 /* AlamofireImage.framework */; };
 		6517BB85230E0BD5005CEFED /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8C8230BF08C001CA848 /* Alamofire.framework */; };
 		6517BB86230E0BD5005CEFED /* MagazineLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8F8230C5E59001CA848 /* MagazineLayout.framework */; };
+		653234C2234B3C2F008DAC13 /* NetworkKit in Frameworks */ = {isa = PBXBuildFile; productRef = 653234C1234B3C2F008DAC13 /* NetworkKit */; };
 		6596E89B230B0360001CA848 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E89A230B0360001CA848 /* AppDelegate.swift */; };
 		6596E89D230B0360001CA848 /* ComicPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E89C230B0360001CA848 /* ComicPageViewController.swift */; };
 		6596E89F230B0360001CA848 /* ComicPageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E89E230B0360001CA848 /* ComicPageDetailViewController.swift */; };
@@ -87,6 +88,7 @@
 		6517BB7C230E095C005CEFED /* xkcd_current.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = xkcd_current.json; sourceTree = "<group>"; };
 		6517BB7D230E095C005CEFED /* search.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = search.txt; sourceTree = "<group>"; };
 		6517BB7E230E095C005CEFED /* empty_search.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = empty_search.txt; sourceTree = "<group>"; };
+		653234C3234B5C83008DAC13 /* NetworkKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NetworkKit; path = ../NetworkKit; sourceTree = "<group>"; };
 		6596E897230B0360001CA848 /* ComicViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ComicViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6596E89A230B0360001CA848 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6596E89C230B0360001CA848 /* ComicPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicPageViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				653234C2234B3C2F008DAC13 /* NetworkKit in Frameworks */,
 				6596E8F9230C5E59001CA848 /* MagazineLayout.framework in Frameworks */,
 				6596E8DD230BFFA3001CA848 /* AlamofireImage.framework in Frameworks */,
 				6596E8D1230BF3AE001CA848 /* Alamofire.framework in Frameworks */,
@@ -187,6 +190,7 @@
 		6596E88E230B0360001CA848 = {
 			isa = PBXGroup;
 			children = (
+				653234C3234B5C83008DAC13 /* NetworkKit */,
 				6596E8C7230BF076001CA848 /* Libraries */,
 				6596E899230B0360001CA848 /* ComicViewer */,
 				6596E8B2230B0361001CA848 /* ComicViewerTests */,
@@ -319,6 +323,9 @@
 			dependencies = (
 			);
 			name = ComicViewer;
+			packageProductDependencies = (
+				653234C1234B3C2F008DAC13 /* NetworkKit */,
+			);
 			productName = ComicViewer;
 			productReference = 6596E897230B0360001CA848 /* ComicViewer.app */;
 			productType = "com.apple.product-type.application";
@@ -369,6 +376,9 @@
 				Base,
 			);
 			mainGroup = 6596E88E230B0360001CA848;
+			packageReferences = (
+				653234C0234B3C2F008DAC13 /* XCRemoteSwiftPackageReference "NetworkKit" */,
+			);
 			productRefGroup = 6596E898230B0360001CA848 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -742,6 +752,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		653234C0234B3C2F008DAC13 /* XCRemoteSwiftPackageReference "NetworkKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:shortcut/NetworkKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		653234C1234B3C2F008DAC13 /* NetworkKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 653234C0234B3C2F008DAC13 /* XCRemoteSwiftPackageReference "NetworkKit" */;
+			productName = NetworkKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6596E88F230B0360001CA848 /* Project object */;
 }

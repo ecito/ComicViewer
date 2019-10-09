@@ -27,14 +27,17 @@ class PageViewDataSource: NSObject, HasComicStore {
 
     // Create a new view controller and pass suitable data.
     let dataViewController = storyboard.instantiateViewController(withIdentifier: "DataViewController") as! ComicPageDetailViewController
-    comicStore.comic(at: index) { comic, error in
-      guard let comic = comic,
-      let viewModel = ComicViewModel(comic: comic),
-      error == nil else {
-        return
-      }
+    comicStore.comic(at: index) { (result: Result<XKCDComic, ComicError>) in
+      switch result {
+      case .success(let comic):
+        guard let viewModel = ComicViewModel(comic: comic) else {
+          return
+        }
 
-      dataViewController.viewModel = viewModel
+        dataViewController.viewModel = viewModel
+      case .failure:
+          print("error")
+      }
     }
 
     return dataViewController

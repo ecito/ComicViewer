@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import AlamofireImage
+import NetworkKit
 
 class ComicCollectionDataSource: NSObject, UICollectionViewDataSource, HasComicStore {
 
@@ -32,11 +33,10 @@ class ComicCollectionDataSource: NSObject, UICollectionViewDataSource, HasComicS
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ComicCollectionViewCell
-    comicStore.comic(at: comicIndex(for: indexPath)) { comic, error in
-      if error != nil {
-        cell.backgroundColor = .red
-      }
-      else if let comic = comic {
+      
+    comicStore.comic(at: comicIndex(for: indexPath)) { (result: Result<XKCDComic, ComicError>) in
+      switch result {
+      case .success(let comic):
         cell.backgroundColor = .white
 
         if let URL = URL(string: comic.imageURL) {
@@ -44,6 +44,9 @@ class ComicCollectionDataSource: NSObject, UICollectionViewDataSource, HasComicS
             //collectionView.collectionViewLayout.invalidateLayout()
           }
         }
+      case .failure:
+        cell.backgroundColor = .red
+
       }
     }
 

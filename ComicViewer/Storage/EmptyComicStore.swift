@@ -15,9 +15,9 @@ class EmptyComicStore: ComicStore {
 
   var currentComic: Comic?
 
-  func setUp(completionHandler: @escaping (Error?) -> Void) {
+  func setUp(completionHandler: @escaping (Result<Void, ComicError>) -> Void) {
   }
 
-  func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) {
+  func comic<T>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) where T : Comic {
   }
 }

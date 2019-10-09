@@ -7,31 +7,52 @@
 //
 
 import Foundation
-import Alamofire
+import NetworkKit
 
 class XKCDComicNetworkAPI: ComicNetworkAPI {
-  static func search(text: String, completionHandler: @escaping (DataResponse<String>) -> Void) {
+  
+  public static let webService = Webservice(baseURL: URL(string: "https://xkcd.com/")!)
+  public static let searchWebService = Webservice(baseURL: URL(string: "https://relevantxkcd.appspot.com/")!)
+
+  static func search(text: String, completionHandler: @escaping (Result<String, ComicError>) -> Void) {
     if let sanitizedText = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-      Alamofire.request(Router.xkcdRelevantSearch(sanitizedText)).validate().responseString(completionHandler: completionHandler)
+      let parameters = ["action": "xkcd",
+                        "query": sanitizedText]
+      
+      searchWebService.requestData(withPath: "process", method: .get, queryParameters: parameters) { (request, response, result: Result<Data, NetworkStackError>) in
+        guard let string = String(data: try! result.get(), encoding: .utf8) else {
+          completionHandler(.failure(.someError("some error")))
+          return 
+        }
+        
+        let stringResult = result.map { data in
+          string
+        }.mapError { error in
+          ComicError.someError("Some error")
+        }
+        completionHandler(stringResult)
+      }
+//     Alamofire.request(Router.xkcdRelevantSearch(sanitizedText)).validate().responseString(completionHandler: completionHandler)
     }
     else {
-      let result = Result<String> { throw ComicError.someError("no text to search") }
-      let response = DataResponse(request: nil, response: nil, data: nil, result: result)
-      completionHandler(response)
+      let result = Result<String, ComicError>.failure(ComicError.someError("no text to search"))
+      completionHandler(result)
     }
   }
 
-  static func currentComic<T>(completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {
+  static func currentComic<T>(completionHandler: @escaping (Result<T, ComicError>) -> Void) where T : Comic {
     comic(at: nil, completionHandler: completionHandler)
   }
 
-  static func comic<T>(at index: Int?, completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {
-    Alamofire.request(Router.xkcdComic(index)).validate().responseData { response in
-      let comic = response.flatMap { data in
-        try JSONDecoder().decode(T.self, from: data)
-      }
+  static func comic<T>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) where T : Comic {
+  
+    webService.request(withPath:Router.xkcdComic(index).url, method: Router.xkcdComic(index).method) { (response: Response<XKCDComic, NetworkStackError>) in
 
-      completionHandler(comic)
+      let newResult = response.result.mapError { error in
+        return ComicError.someError("asdf")
+      }
+      
+      completionHandler(newResult as! Result<T, ComicError>)
     }
   }
 }

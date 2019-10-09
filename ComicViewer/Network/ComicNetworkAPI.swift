@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import Alamofire
+import NetworkKit
 
 protocol ComicNetworkAPI {
-  static func currentComic<T: Comic>(completionHandler: @escaping (DataResponse<T>) -> Void) -> Void
-  static func comic<T: Comic>(at index: Int?, completionHandler: @escaping (DataResponse<T>) -> Void) -> Void
+  static func currentComic<T: Comic>(completionHandler: @escaping (Result<T, ComicError>) -> Void) -> Void
+  static func comic<T: Comic>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) -> Void
 
-  static func search(text: String, completionHandler: @escaping (DataResponse<String>) -> Void) -> Void
+  static func search(text: String, completionHandler: @escaping (Result<String, ComicError>) -> Void) -> Void
 }

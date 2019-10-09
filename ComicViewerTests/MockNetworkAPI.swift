@@ -7,35 +7,41 @@
 //
 
 import Foundation
-import Alamofire
+import NetworkKit
 
 @testable import ComicViewer
 
 class MockNetworkAPI: ComicNetworkAPI {
-  static func currentComic<T>(completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {
+  static func currentComic<T>(completionHandler: @escaping (Result<T, ComicError>) -> Void) where T : Comic {
     MockNetworkAPI.comic(at: 0, completionHandler: completionHandler)
   }
 
-  static func comic<T>(at index: Int?, completionHandler: @escaping (DataResponse<T>) -> Void) where T : Comic {
+  static func comic<T>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) where T : Comic {
     if let path = Bundle(for: XKCDRelevantComicSearchProviderTests.self).path(forResource: (index != nil) ? "xkcd_614" : "xkcd_current", ofType: "json") {
-      let result = Result<MockComic> {
+      let result = Result<MockComic, Error> {
         let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
         return try JSONDecoder().decode(MockComic.self, from: data)
       }
 
-      let response = DataResponse<MockComic>(request: nil, response: nil, data: nil, result: result)
-      completionHandler(response as! DataResponse<T>)
+      let newResult = result.mapError { error in
+        return ComicError.someError("asdf")
+      }
+      
+      completionHandler(newResult as! Result<T, ComicError>)
     }
   }
 
-  static func search(text: String, completionHandler: @escaping (DataResponse<String>) -> Void) {
+  static func search(text: String, completionHandler: @escaping (Result<String, ComicError>) -> Void) {
     if let path = Bundle(for: XKCDRelevantComicSearchProviderTests.self).path(forResource: (text == "fail") ? "empty_search" : "search", ofType: "txt") {
-      let result = Result<String> {
+      let result = Result<String, Error> {
         try String(decoding: Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe), as: UTF8.self)
       }
 
-      let response = DataResponse<String>(request: nil, response: nil, data: nil, result: result)
-      completionHandler(response)
+      let newResult = result.mapError { error in
+        ComicError.someError("asdf")
+      }
+      
+      completionHandler(newResult)
     }
   }
 }

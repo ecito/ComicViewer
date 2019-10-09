@@ -16,13 +16,13 @@ class LoadingViewController: UIViewController, HasComicStore {
     super.viewDidLoad()
 
     comicStore = DependencyInjector.dependency!.resolveStore()
-    comicStore.setUp() { [weak self] error in
-      guard error == nil else {
+    comicStore.setUp() { [weak self] result in
+      switch result {
+      case .success(_):
+        self?.performSegue(withIdentifier: "PushComicCollection", sender: self)
+      case .failure(_):
         self?.showError()
-        return
       }
-
-      self?.performSegue(withIdentifier: "PushComicCollection", sender: self)
     }
   }
 

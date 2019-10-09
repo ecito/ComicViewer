@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Alamofire
 
 class XKCDComicStore: ComicStore {
+  
   var numberOfComics: Int {
     return availableIndexes.count
   }
@@ -18,35 +18,28 @@ class XKCDComicStore: ComicStore {
 
   var currentComic: Comic?
 
-  func setUp(completionHandler: @escaping (Error?) -> Void) {
-    comic(at: nil) { [weak self] comic, error in
-      self?.currentComic = comic
-      if let comic = comic,
-        comic.index > 1 {
-        self?.availableIndexes = Array(1...comic.index).reversed()
+  func setUp(completionHandler: @escaping (Result<Void, ComicError>) -> Void) {
+    comic(at: nil) { [weak self] (result: Result<XKCDComic, ComicError>) in
+      switch result {
+      case .success(let comic):
+        self?.currentComic = comic
+        if comic.index > 1 {
+          self?.availableIndexes = Array(1...comic.index).reversed()
+        }
+        completionHandler(.success(()))
+      case .failure(let error):
+        completionHandler(.failure(error))
+      
       }
-      completionHandler(error)
     }
   }
 
-  func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) -> Void {
+  func comic<T>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) -> Void where T : Comic {
     if let index = index,
       !availableIndexes.contains(index) {
       fatalError("you done messed up, any index passed in here should be in availableIndexes")
     }
 
-    DependencyInjector.dependency?.resolveNetworkType().comic(at: index) { (response: DataResponse<XKCDComic>) in
-      guard response.error == nil else {
-        completionHandler(nil, response.error)
-        return
-      }
-
-      guard let comic = response.value else {
-        completionHandler(nil, ComicError.someError("no comic found"))
-        return
-      }
-
-      completionHandler(comic, nil)
-    }
+    DependencyInjector.dependency?.resolveNetworkType().comic(at: index, completionHandler: completionHandler)
   }
 }

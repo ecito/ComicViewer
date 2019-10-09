@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import NetworkKit
 
 @testable import ComicViewer
 
 class MockComicStore: ComicStore {
+  
   var availableIndexes: [Int] = [1]
 
   var numberOfComics: Int = 1
@@ -24,11 +26,11 @@ class MockComicStore: ComicStore {
     return comic
   }()
 
-  func setUp(completionHandler: @escaping (Error?) -> Void) {
-    completionHandler(nil)
+  func setUp(completionHandler: @escaping (Result<Void, ComicError>) -> Void) {
+    completionHandler(.success(()))
   }
 
-  func comic(at index: Int?, completionHandler: @escaping (Comic?, Error?) -> Void) {
-    completionHandler(currentComic, nil)
+  func comic<T>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) where T : Comic {
+    //completionHandler(Result<MockComic, ComicError>.success(currentComic! as! MockComic))
   }
 }

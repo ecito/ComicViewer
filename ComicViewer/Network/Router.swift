@@ -7,9 +7,16 @@
 //
 
 import Foundation
-import Alamofire
+import NetworkKit
 
-enum Router: URLRequestConvertible {
+protocol RouterProtocol {
+//  var method: HTTPMethod { get }
+//  var url: String { get }
+  
+  func asURLRequest() throws -> URLRequest
+}
+
+enum Router: RouterProtocol {
   case xkcdComic(_ index: Int?)
   case xkcdRelevantSearch(_ text: String)
 
@@ -26,17 +33,15 @@ enum Router: URLRequestConvertible {
     switch self {
     case .xkcdComic(let index):
       if let index = index {
-        return "https://xkcd.com/\(index)/info.0.json"
+        return "\(index)/info.0.json"
       }
       else {
-        return "https://xkcd.com/info.0.json"
+        return "info.0.json"
       }
     case .xkcdRelevantSearch(let text):
-      return "https://relevantxkcd.appspot.com/process?action=xkcd&query=\(text)"
+      return "process"
     }
   }
-
-  // MARK: URLRequestConvertible
 
   func asURLRequest() throws -> URLRequest {
     var urlRequest = URLRequest(url: try url.asURL())

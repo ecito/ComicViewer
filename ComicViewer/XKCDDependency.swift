@@ -8,7 +8,7 @@
 
 import Foundation
 
-class XKCDDependency: Dependency {
+class XKCDDependency: Dependency {  
   func resolveNetworkType() -> ComicNetworkAPI.Type {
     return XKCDComicNetworkAPI.self
   }
