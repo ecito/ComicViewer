@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "ShortKit",
+        "repositoryURL": "git@github.com:shortcut/ShortKit.git",
+        "state": {
+          "branch": null,
+          "revision": "4ec560e989dded0969bb992b824711f9bca25320",
+          "version": "0.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
