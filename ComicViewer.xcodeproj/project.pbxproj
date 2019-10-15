@@ -56,6 +56,8 @@
 		6596E8F4230C4C64001CA848 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8F2230C4C64001CA848 /* LoadingViewController.swift */; };
 		6596E8F7230C5113001CA848 /* EmptyComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8F6230C5113001CA848 /* EmptyComicStore.swift */; };
 		6596E8F9230C5E59001CA848 /* MagazineLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8F8230C5E59001CA848 /* MagazineLayout.framework */; };
+		65D69F6F2354C35D0046E32E /* ShortKitNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 65D69F6E2354C35D0046E32E /* ShortKitNetworking */; };
+		65D69F712354C35D0046E32E /* ShortKitExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 65D69F702354C35D0046E32E /* ShortKitExtension */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +121,7 @@
 		6596E8F2230C4C64001CA848 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		6596E8F6230C5113001CA848 /* EmptyComicStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyComicStore.swift; sourceTree = "<group>"; };
 		6596E8F8230C5E59001CA848 /* MagazineLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MagazineLayout.framework; path = Carthage/Build/iOS/MagazineLayout.framework; sourceTree = SOURCE_ROOT; };
+		65D69F722354C7760046E32E /* ShortKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ShortKit; path = ../ShortKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D69F712354C35D0046E32E /* ShortKitExtension in Frameworks */,
+				65D69F6F2354C35D0046E32E /* ShortKitNetworking in Frameworks */,
 				653234C2234B3C2F008DAC13 /* NetworkKit in Frameworks */,
 				6596E8F9230C5E59001CA848 /* MagazineLayout.framework in Frameworks */,
 				6596E8DD230BFFA3001CA848 /* AlamofireImage.framework in Frameworks */,
@@ -190,6 +195,7 @@
 		6596E88E230B0360001CA848 = {
 			isa = PBXGroup;
 			children = (
+				65D69F722354C7760046E32E /* ShortKit */,
 				653234C3234B5C83008DAC13 /* NetworkKit */,
 				6596E8C7230BF076001CA848 /* Libraries */,
 				6596E899230B0360001CA848 /* ComicViewer */,
@@ -325,6 +331,8 @@
 			name = ComicViewer;
 			packageProductDependencies = (
 				653234C1234B3C2F008DAC13 /* NetworkKit */,
+				65D69F6E2354C35D0046E32E /* ShortKitNetworking */,
+				65D69F702354C35D0046E32E /* ShortKitExtension */,
 			);
 			productName = ComicViewer;
 			productReference = 6596E897230B0360001CA848 /* ComicViewer.app */;
@@ -378,6 +386,7 @@
 			mainGroup = 6596E88E230B0360001CA848;
 			packageReferences = (
 				653234C0234B3C2F008DAC13 /* XCRemoteSwiftPackageReference "NetworkKit" */,
+				65D69F6D2354C35D0046E32E /* XCRemoteSwiftPackageReference "ShortKit" */,
 			);
 			productRefGroup = 6596E898230B0360001CA848 /* Products */;
 			projectDirPath = "";
@@ -762,6 +771,14 @@
 				minimumVersion = 0.0.1;
 			};
 		};
+		65D69F6D2354C35D0046E32E /* XCRemoteSwiftPackageReference "ShortKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:shortcut/ShortKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -769,6 +786,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 653234C0234B3C2F008DAC13 /* XCRemoteSwiftPackageReference "NetworkKit" */;
 			productName = NetworkKit;
+		};
+		65D69F6E2354C35D0046E32E /* ShortKitNetworking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65D69F6D2354C35D0046E32E /* XCRemoteSwiftPackageReference "ShortKit" */;
+			productName = ShortKitNetworking;
+		};
+		65D69F702354C35D0046E32E /* ShortKitExtension */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65D69F6D2354C35D0046E32E /* XCRemoteSwiftPackageReference "ShortKit" */;
+			productName = ShortKitExtension;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

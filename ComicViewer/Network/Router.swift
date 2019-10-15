@@ -9,14 +9,7 @@
 import Foundation
 import NetworkKit
 
-protocol RouterProtocol {
-//  var method: HTTPMethod { get }
-//  var url: String { get }
-  
-  func asURLRequest() throws -> URLRequest
-}
-
-enum Router: RouterProtocol {
+enum Router  {
   case xkcdComic(_ index: Int?)
   case xkcdRelevantSearch(_ text: String)
 
@@ -38,15 +31,8 @@ enum Router: RouterProtocol {
       else {
         return "info.0.json"
       }
-    case .xkcdRelevantSearch(let text):
+    case .xkcdRelevantSearch:
       return "process"
     }
-  }
-
-  func asURLRequest() throws -> URLRequest {
-    var urlRequest = URLRequest(url: try url.asURL())
-    urlRequest.httpMethod = method.rawValue
-
-    return urlRequest
   }
 }

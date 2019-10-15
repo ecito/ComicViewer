@@ -32,7 +32,6 @@ class XKCDComicNetworkAPI: ComicNetworkAPI {
         }
         completionHandler(stringResult)
       }
-//     Alamofire.request(Router.xkcdRelevantSearch(sanitizedText)).validate().responseString(completionHandler: completionHandler)
     }
     else {
       let result = Result<String, ComicError>.failure(ComicError.someError("no text to search"))
