@@ -8,10 +8,12 @@
 
 import Foundation
 import NetworkKit
+import UIKit
 
 protocol ComicNetworkAPI {
   static func currentComic<T: Comic>(completionHandler: @escaping (Result<T, ComicError>) -> Void) -> Void
   static func comic<T: Comic>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) -> Void
+  static func comicImage(for urlPath: String, completionHandler: @escaping (Result<UIImage, ComicError>) -> Void) -> Void
 
   static func search(text: String, completionHandler: @escaping (Result<String, ComicError>) -> Void) -> Void
 }

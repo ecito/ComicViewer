@@ -7,8 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 class XKCDComicStore: ComicStore {
+  func comicImage(for comic: Comic, completionHandler: @escaping (Result<UIImage, ComicError>) -> Void) {
+    DependencyInjector.dependency?.resolveNetworkType().comicImage(for: comic.imageURL, completionHandler: completionHandler)
+  }
+  
   
   var numberOfComics: Int {
     return availableIndexes.count

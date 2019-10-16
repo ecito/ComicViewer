@@ -59,7 +59,12 @@ class ComicPageDetailViewController: UIViewController, HasComicViewModel {
     }
 
     detailLabel.text = viewModel.details
-    imageView.af_setImage(withURL: viewModel.url)
+    
+    DependencyInjector.dependency?.resolveNetworkType().comicImage(for: viewModel.url.absoluteString, completionHandler: { [weak self] (result: Result<UIImage, ComicError>) in
+      if case let .success(image) = result {
+        self?.imageView.image = image
+      }
+    })
   }
 }
 

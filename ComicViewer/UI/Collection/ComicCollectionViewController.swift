@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import MagazineLayout
 
 protocol HasComicViewModel: NSObject {
   var viewModel: ComicViewModel? { get set }
@@ -47,7 +46,7 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
 
     setupSearch()
 
-    collectionView.collectionViewLayout = MagazineLayout()
+    collectionView.collectionViewLayout = UICollectionViewFlowLayout()
     collectionView.register(ComicCollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
     collectionView.dataSource = self.dataSource
     collectionView.delegate = self
@@ -77,65 +76,6 @@ class ComicCollectionViewController: UICollectionViewController, HasComicStore {
     if let destination = segue.destination as? HasComicViewModel {
       destination.viewModel = viewModel
     }
-  }
-}
-
-extension ComicCollectionViewController: UICollectionViewDelegateMagazineLayout {
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, visibilityModeForHeaderInSectionAtIndex index: Int) -> MagazineLayoutHeaderVisibilityMode {
-    return .hidden
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, visibilityModeForFooterInSectionAtIndex index: Int) -> MagazineLayoutFooterVisibilityMode {
-    return .hidden
-  }
-
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, visibilityModeForBackgroundInSectionAtIndex index: Int) -> MagazineLayoutBackgroundVisibilityMode {
-    return .hidden
-  }
-
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    sizeModeForItemAt indexPath: IndexPath)
-    -> MagazineLayoutItemSizeMode
-  {
-    return MagazineLayoutItemSizeMode(widthMode: .halfWidth, heightMode: .dynamic)
-  }
-
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    horizontalSpacingForItemsInSectionAtIndex index: Int)
-    -> CGFloat
-  {
-    return 12
-  }
-
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    verticalSpacingForElementsInSectionAtIndex index: Int)
-    -> CGFloat
-  {
-    return 12
-  }
-
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetsForSectionAtIndex index: Int)
-    -> UIEdgeInsets
-  {
-    return UIEdgeInsets(top: 24, left: 4, bottom: 24, right: 4)
-  }
-
-  func collectionView(
-    _ collectionView: UICollectionView,
-    layout collectionViewLayout: UICollectionViewLayout,
-    insetsForItemsInSectionAtIndex index: Int)
-    -> UIEdgeInsets
-  {
-    return UIEdgeInsets(top: 24, left: 4, bottom: 24, right: 4)
   }
 }
 

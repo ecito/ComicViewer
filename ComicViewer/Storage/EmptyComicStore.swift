@@ -7,8 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
 class EmptyComicStore: ComicStore {
+  func comicImage(for comic: Comic, completionHandler: @escaping (Result<UIImage, ComicError>) -> Void) {
+  }
+  
   var availableIndexes: [Int] = []
 
   var numberOfComics: Int = 0

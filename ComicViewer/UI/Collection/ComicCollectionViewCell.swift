@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import MagazineLayout
 
-class ComicCollectionViewCell: MagazineLayoutCollectionViewCell {
+class ComicCollectionViewCell: UICollectionViewCell {
 
   let imageView: ScaledHeightImageView
 
@@ -36,6 +35,6 @@ class ComicCollectionViewCell: MagazineLayoutCollectionViewCell {
   override func prepareForReuse() {
     super.prepareForReuse()
     imageView.image = nil
-    imageView.af_cancelImageRequest()
+//    imageView.af_cancelImageRequest()
   }
 }

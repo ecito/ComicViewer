@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import AlamofireImage
 import NetworkKit
 
 class ComicCollectionDataSource: NSObject, UICollectionViewDataSource, HasComicStore {
@@ -34,14 +33,13 @@ class ComicCollectionDataSource: NSObject, UICollectionViewDataSource, HasComicS
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ComicCollectionViewCell
       
-    comicStore.comic(at: comicIndex(for: indexPath)) { (result: Result<XKCDComic, ComicError>) in
+    comicStore.comic(at: comicIndex(for: indexPath)) { [weak self] (result: Result<XKCDComic, ComicError>) in
       switch result {
       case .success(let comic):
         cell.backgroundColor = .white
-
-        if let URL = URL(string: comic.imageURL) {
-          cell.imageView.af_setImage(withURL: URL, placeholderImage: UIImage(named: "loading")) { response in
-            //collectionView.collectionViewLayout.invalidateLayout()
+        self?.comicStore.comicImage(for: comic) { (result: Result<UIImage, ComicError>) in
+          if case let .success(image) = result {
+            cell.imageView.image = image
           }
         }
       case .failure:

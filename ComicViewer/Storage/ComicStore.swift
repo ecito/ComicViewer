@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 /*
 Generic comic store that could be backed by network, cache, coredata, etc
@@ -20,4 +21,6 @@ protocol ComicStore {
   func setUp(completionHandler: @escaping (Result<Void, ComicError>) -> Void) -> Void
 
   func comic<T>(at index: Int?, completionHandler: @escaping (Result<T, ComicError>) -> Void) -> Void where T : Comic
+    
+  func comicImage(for comic: Comic, completionHandler: @escaping (Result<UIImage, ComicError>) -> Void) -> Void
 }

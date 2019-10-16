@@ -40,11 +40,9 @@
 		6596E8BF230B0F0A001CA848 /* Comic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8BE230B0F0A001CA848 /* Comic.swift */; };
 		6596E8C1230B103B001CA848 /* XKCDComic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8C0230B103B001CA848 /* XKCDComic.swift */; };
 		6596E8C3230B1333001CA848 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8C2230B1333001CA848 /* Model.swift */; };
-		6596E8D1230BF3AE001CA848 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8C8230BF08C001CA848 /* Alamofire.framework */; };
 		6596E8D8230BFC05001CA848 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8D7230BFC05001CA848 /* Router.swift */; };
 		6596E8DA230BFC38001CA848 /* ComicNetworkAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8D9230BFC38001CA848 /* ComicNetworkAPI.swift */; };
 		6596E8DC230BFCCE001CA848 /* XKCDNetworkComicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8DB230BFCCE001CA848 /* XKCDNetworkComicAPI.swift */; };
-		6596E8DD230BFFA3001CA848 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8D5230BF6AF001CA848 /* AlamofireImage.framework */; };
 		6596E8DF230C1AF7001CA848 /* Dependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8DE230C1AF7001CA848 /* Dependency.swift */; };
 		6596E8E1230C1BE4001CA848 /* ComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8E0230C1BE4001CA848 /* ComicStore.swift */; };
 		6596E8E3230C209F001CA848 /* XKCDComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8E2230C209F001CA848 /* XKCDComicStore.swift */; };
@@ -55,7 +53,6 @@
 		6596E8F0230C49B8001CA848 /* ComicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8EE230C49B8001CA848 /* ComicCollectionViewCell.swift */; };
 		6596E8F4230C4C64001CA848 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8F2230C4C64001CA848 /* LoadingViewController.swift */; };
 		6596E8F7230C5113001CA848 /* EmptyComicStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6596E8F6230C5113001CA848 /* EmptyComicStore.swift */; };
-		6596E8F9230C5E59001CA848 /* MagazineLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6596E8F8230C5E59001CA848 /* MagazineLayout.framework */; };
 		65D69F6F2354C35D0046E32E /* ShortKitNetworking in Frameworks */ = {isa = PBXBuildFile; productRef = 65D69F6E2354C35D0046E32E /* ShortKitNetworking */; };
 		65D69F712354C35D0046E32E /* ShortKitExtension in Frameworks */ = {isa = PBXBuildFile; productRef = 65D69F702354C35D0046E32E /* ShortKitExtension */; };
 /* End PBXBuildFile section */
@@ -132,9 +129,6 @@
 				65D69F712354C35D0046E32E /* ShortKitExtension in Frameworks */,
 				65D69F6F2354C35D0046E32E /* ShortKitNetworking in Frameworks */,
 				653234C2234B3C2F008DAC13 /* NetworkKit in Frameworks */,
-				6596E8F9230C5E59001CA848 /* MagazineLayout.framework in Frameworks */,
-				6596E8DD230BFFA3001CA848 /* AlamofireImage.framework in Frameworks */,
-				6596E8D1230BF3AE001CA848 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,20 +425,15 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AlamofireImage.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/MagazineLayout.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AlamofireImage.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/MagazineLayout.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 

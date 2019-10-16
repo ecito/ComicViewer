@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import AlamofireImage
-
 
 class PageViewDataSource: NSObject, HasComicStore {
 
@@ -45,6 +43,10 @@ class PageViewDataSource: NSObject, HasComicStore {
 
   func indexOfViewController(_ viewController: ComicPageDetailViewController) -> Int {
     return viewController.comicIndex
+  }
+  
+  func comicImage(for comic: Comic, completionHandler: @escaping (Result<UIImage, ComicError>) -> Void) -> Void {
+    comicStore.comicImage(for: comic, completionHandler: completionHandler)
   }
 }
 

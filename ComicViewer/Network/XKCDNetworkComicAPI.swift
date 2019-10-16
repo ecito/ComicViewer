@@ -8,8 +8,15 @@
 
 import Foundation
 import NetworkKit
+import UIKit
 
 class XKCDComicNetworkAPI: ComicNetworkAPI {
+  static func comicImage(for urlPath: String, completionHandler: @escaping (Result<UIImage, ComicError>) -> Void) -> Void {
+    webService.requestImage(withPath: urlPath, method: .get) { (response: Response<UIImage, NetworkStackError>) in
+      completionHandler(response.result.mapError({ error in ComicError.someError("image error") }))
+    }
+  }
+  
   
   public static let webService = Webservice(baseURL: URL(string: "https://xkcd.com/")!)
   public static let searchWebService = Webservice(baseURL: URL(string: "https://relevantxkcd.appspot.com/")!)
